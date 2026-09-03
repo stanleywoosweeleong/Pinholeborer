@@ -1,0 +1,14 @@
+{
+  "name": "榴莲蛀干小蠹 Durian Borer Action",
+  "short_name": "蛀干小蠹",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FAFAF6",
+  "theme_color": "#3A2A1C",
+  "lang": "zh",
+  "icons": [
+    {"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}

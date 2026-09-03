@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#3A2A1C">
+<meta name="color-scheme" content="light only">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="蛀干小蠹">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon-192.png">
+<title>榴莲蛀干小蠹 · Durian Borer Action</title>
+<style>
+:root{
+  color-scheme:light only;
+  --ink:#3A2A1C;      /* bark */
+  --ink-2:#6B5A48;
+  --page:#FAFAF6;
+  --line:#DDD6C8;
+  --husk:#3F6B2A;     /* durian husk green */
+  --husk-2:#2E5120;
+  --sawdust:#E9DCC0;  /* frass */
+  --sawdust-2:#F6EFDF;
+  --g-prevent:#2E5F86;
+  --g-light:#3F6B2A;
+  --g-mod:#B8700F;
+  --g-severe:#9B2E20;
+  --fs:18px;
+  --tab-h:70px;
+}
+html[lang="zh"]{--fs:19px}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--page)!important;color:var(--ink)!important;
+  font-family:-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC","Segoe UI",Roboto,sans-serif;
+  font-size:var(--fs);line-height:1.55;-webkit-text-size-adjust:100%}
+body{padding-bottom:calc(var(--tab-h) + env(safe-area-inset-bottom))}
+header{position:sticky;top:0;z-index:5;background:var(--ink);color:#FAF3E4;
+  padding:calc(10px + env(safe-area-inset-top)) 16px 10px;display:flex;align-items:center;gap:12px}
+header h1{font-size:1.05em;margin:0;font-weight:700;flex:1;letter-spacing:.02em;line-height:1.2}
+header h1 small{display:block;font-weight:400;font-size:.72em;opacity:.75}
+#langBtn,#fontBtn{background:transparent;color:#FAF3E4;border:1.5px solid rgba(250,243,228,.55);
+  border-radius:999px;padding:7px 14px;font-size:16px;font-family:inherit;min-width:64px;line-height:1.2}
+#fontBtn{min-width:52px;padding:7px 10px;font-weight:700}
+header{gap:8px}
+main{max-width:640px;margin:0 auto;padding:18px 16px 24px;background:var(--page)}
+#wrap{background:var(--page);min-height:100vh}
+h2,h3,.lead,.q .qt,.note{color:var(--ink)}
+.lead,.note,.q .qt{color:var(--ink-2)}
+.q .qt{color:var(--ink)}
+section.view{display:none}
+section.view.on{display:block}
+h2{font-size:1.35em;margin:6px 0 14px;line-height:1.25}
+h3{font-size:1.05em;margin:22px 0 8px}
+p{margin:0 0 12px}
+ul{padding-left:22px;margin:0 0 12px}
+li{margin-bottom:6px}
+.lead{font-size:1.05em;color:var(--ink-2)}
+.key{background:var(--sawdust-2);border-left:6px solid var(--sawdust);padding:12px 14px;margin:14px 0 18px;border-radius:0 8px 8px 0}
+.key b{display:block;margin-bottom:4px}
+.warn{border-left-color:var(--g-severe);background:#FBEFED}
+.note{font-size:.88em;color:var(--ink-2)}
+/* compare table for identification */
+.cmp{display:grid;grid-template-columns:1fr;gap:12px;margin:12px 0 6px}
+.cmp article{border:1.5px solid var(--line);border-radius:10px;padding:14px 14px 8px;background:#fff}
+.cmp article h4{margin:0 0 6px;font-size:1.08em;display:flex;align-items:center;gap:10px}
+.cmp .dot{width:14px;height:14px;border-radius:50%;flex:none}
+.cmp article ul{margin-bottom:6px}
+.cmp article.borer{border-color:var(--husk)}
+.cmp article.borer h4 .dot{background:var(--ink)}
+.cmp article.long h4 .dot{background:var(--g-mod)}
+.cmp article.canker h4 .dot{background:var(--g-severe)}
+/* grading */
+.q{margin:0 0 20px}
+.q .qt{font-weight:700;margin-bottom:8px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opts button{font-family:inherit;font-size:.95em;line-height:1.3;padding:12px 10px;border-radius:10px;
+  border:1.5px solid var(--line);background:#fff;color:var(--ink);text-align:left;min-height:52px}
+.opts button.sel{border-color:var(--husk);background:#EEF4E8;box-shadow:inset 0 0 0 1.5px var(--husk)}
+.opts.one{grid-template-columns:1fr}
+.result{display:none;margin-top:20px;border-radius:14px;overflow:hidden;background:#fff;border:1.5px solid var(--line)}
+.result.on{display:block}
+.result .big{display:flex;align-items:center;gap:18px;padding:18px 20px;color:#fff}
+.result .big .ch{font-size:4.2em;font-weight:800;line-height:1;letter-spacing:-.02em}
+.result .big .lbl{font-size:1.15em;font-weight:700;line-height:1.3}
+.result .big .lbl small{display:block;font-weight:400;opacity:.9;font-size:.85em;margin-top:4px}
+.result .why{padding:12px 18px;border-top:1px solid var(--line)}
+.g-prevent .big{background:var(--g-prevent)}
+.g-light .big{background:var(--g-light)}
+.g-mod .big{background:var(--g-mod)}
+.g-severe .big{background:var(--g-severe)}
+.btnrow{display:flex;gap:10px;padding:0 14px 14px;flex-wrap:wrap}
+.btn{font-family:inherit;font-size:1em;padding:13px 18px;border-radius:10px;border:none;background:var(--husk);color:#fff;font-weight:700;flex:1;min-width:140px}
+.btn.sec{background:#fff;color:var(--husk);border:1.5px solid var(--husk)}
+.btn.small{flex:none;padding:8px 14px;font-size:.9em;font-weight:600}
+.btn.danger{background:#fff;color:var(--g-severe);border:1.5px solid var(--g-severe)}
+/* plan */
+.gradepick{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:0 0 18px}
+.gradepick button{font-family:inherit;font-size:.9em;padding:10px 4px;border-radius:8px;border:1.5px solid var(--line);background:#fff;color:var(--ink);font-weight:700}
+.gradepick button.sel{color:#fff;border-color:transparent}
+.gradepick button.p.sel{background:var(--g-prevent)}
+.gradepick button.l.sel{background:var(--g-light)}
+.gradepick button.m.sel{background:var(--g-mod)}
+.gradepick button.s.sel{background:var(--g-severe)}
+ol.steps{list-style:none;padding:0;margin:0 0 18px;counter-reset:s}
+ol.steps li{position:relative;padding:10px 0 12px 54px;border-left:4px solid var(--line);margin-left:20px;counter-increment:s}
+ol.steps li::before{content:counter(s);position:absolute;left:-22px;top:8px;width:40px;height:40px;border-radius:50%;
+  background:var(--ink);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:1.05em}
+ol.steps li b{display:block;margin-bottom:3px}
+ol.steps li span{color:var(--ink-2);font-size:.95em}
+.p-prevent ol.steps li{border-color:var(--g-prevent)} .p-prevent ol.steps li::before{background:var(--g-prevent)}
+.p-light ol.steps li{border-color:var(--g-light)} .p-light ol.steps li::before{background:var(--g-light)}
+.p-mod ol.steps li{border-color:var(--g-mod)} .p-mod ol.steps li::before{background:var(--g-mod)}
+.p-severe ol.steps li{border-color:var(--g-severe)} .p-severe ol.steps li::before{background:var(--g-severe)}
+details{border:1.5px solid var(--line);border-radius:10px;padding:0 14px;margin:0 0 12px;background:#fff}
+details summary{padding:12px 0;font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details summary::after{content:"+";font-size:1.4em;color:var(--husk);font-weight:400}
+details[open] summary::after{content:"–"}
+details .in{padding:0 0 12px}
+table{width:100%;border-collapse:collapse;font-size:.92em;margin:6px 0 10px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:700;color:var(--ink-2);font-size:.9em}
+td.no{color:var(--g-severe)}
+a{color:var(--husk-2)}
+/* schedule */
+.trees{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
+.tree{border:1.5px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}
+.tree .th{display:flex;align-items:center;gap:12px;padding:12px 14px}
+.tree .gch{width:44px;height:44px;border-radius:10px;color:#fff;font-weight:800;font-size:1.3em;display:flex;align-items:center;justify-content:center;flex:none}
+.tree .nm{flex:1;min-width:0}
+.tree .nm b{display:block;font-size:1.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tree .nm span{font-size:.85em;color:var(--ink-2)}
+.tree .due{text-align:right;flex:none}
+.tree .due b{display:block;font-size:1.05em}
+.tree .due span{font-size:.8em;color:var(--ink-2)}
+.tree .due.over b{color:var(--g-severe)}
+.tree .due.today b{color:var(--g-mod)}
+.tree .tl{display:none;border-top:1px solid var(--line);padding:6px 14px 12px}
+.tree.open .tl{display:block}
+.ev{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line)}
+.ev:last-of-type{border-bottom:none}
+.ev .d{width:88px;flex:none;font-weight:700;font-size:.92em}
+.ev .t{flex:1;font-size:.95em}
+.ev.done{opacity:.5;text-decoration:line-through}
+.ev.over .d{color:var(--g-severe)}
+.ev button{font-family:inherit;font-size:.85em;padding:7px 12px;border-radius:8px;border:1.5px solid var(--husk);background:#fff;color:var(--husk);font-weight:700;flex:none}
+.ev button:disabled{opacity:.35}
+.empty{border:2px dashed var(--line);border-radius:12px;padding:22px 16px;text-align:center;color:var(--ink-2)}
+form.add{border:1.5px solid var(--husk);border-radius:12px;padding:14px;background:#fff;margin-bottom:18px;display:none}
+form.add.on{display:block}
+label{display:block;font-weight:700;margin:10px 0 6px}
+input[type=text],input[type=date],select{width:100%;font-family:inherit;font-size:1em;padding:11px 12px;border:1.5px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+.radio{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.radio button{font-family:inherit;font-size:.92em;padding:11px 8px;border-radius:8px;border:1.5px solid var(--line);background:#fff;color:var(--ink);line-height:1.3}
+.radio button.sel{border-color:var(--husk);background:#EEF4E8;box-shadow:inset 0 0 0 1.5px var(--husk)}
+.radio.four{grid-template-columns:repeat(4,1fr)}
+/* tabs */
+nav{position:fixed;left:0;right:0;bottom:0;height:calc(var(--tab-h) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);
+  background:#fff;border-top:1.5px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);z-index:5}
+nav button{font-family:inherit;border:none;background:transparent;color:var(--ink-2);font-size:.82em;line-height:1.2;padding:8px 4px 6px;display:flex;flex-direction:column;align-items:center;gap:4px}
+nav button svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav button.on{color:var(--husk-2);font-weight:700}
+nav button.on::before{content:"";position:absolute;top:0;width:44px;height:3px;background:var(--husk)}
+nav button{position:relative}
+nav button .badge{position:absolute;top:6px;right:calc(50% - 26px);background:var(--g-severe);color:#fff;font-size:.7em;font-weight:700;border-radius:999px;padding:1px 6px;min-width:18px}
+footer{max-width:640px;margin:0 auto;padding:6px 16px 20px;font-size:.78em;color:var(--ink-2);text-align:center}
+footer button{font-family:inherit;font-size:1em;background:none;border:none;color:var(--ink-2);text-decoration:underline;padding:0}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--tab-h) + 16px + env(safe-area-inset-bottom));background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:.9em;opacity:0;transition:opacity .25s;pointer-events:none;z-index:9;white-space:nowrap}
+.toast.on{opacity:1}
+:focus-visible{outline:3px solid var(--g-mod);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (min-width:560px){.cmp{grid-template-columns:1fr 1fr 1fr}}
+</style>
+</head>
+<body>
+<div id="wrap">
+<header>
+  <h1><span data-i18n="app.title">榴莲蛀干小蠹</span><small data-i18n="app.sub">针孔蛀心虫 辨认 · 分级 · 行动 · 日程</small></h1>
+  <button id="fontBtn" aria-label="Font size">A</button>
+  <button id="langBtn" aria-label="Language">中文</button>
+</header>
+
+<main>
+<!-- ================= IDENTIFY ================= -->
+<section class="view on" id="v-id">
+  <h2 data-i18n="id.h">树干上的洞，是哪一种？</h2>
+  <p class="lead" data-i18n="id.lead">先分清楚。三种情况用药完全不同，用错了只会浪费钱和时间。</p>
+  <div class="cmp">
+    <article class="borer">
+      <h4><span class="dot"></span><span data-i18n="id.b.h">针孔蛀心虫（小蠹虫）</span></h4>
+      <ul>
+        <li data-i18n="id.b.1">洞口很小，1–2 毫米，像针扎的孔</li>
+        <li data-i18n="id.b.2">洞口有细粉状木屑，有时挤成小圆柱（像牙签）</li>
+        <li data-i18n="id.b.3">很多孔聚在一起，多在树头到 1 米高，或大枝分叉处</li>
+        <li data-i18n="id.b.4">虫很小，2–3 毫米，黑褐色，很少看见</li>
+        <li data-i18n="id.b.5">虫不吃木头，在洞里种真菌吃菌 — 所以内吸药没用，药必须留在树皮上</li>
+      </ul>
+    </article>
+    <article class="long">
+      <h4><span class="dot"></span><span data-i18n="id.l.h">天牛（钻心虫）</span></h4>
+      <ul>
+        <li data-i18n="id.l.1">洞口大，5–10 毫米以上，一棵树通常只有一两个</li>
+        <li data-i18n="id.l.2">洞口有粗木屑、木丝，有时像锯屑堆成一堆</li>
+        <li data-i18n="id.l.3">是幼虫直接吃木头，用铁线掏或削开树皮把虫挖出来</li>
+        <li data-i18n="id.l.4">不是这个软件处理的对象</li>
+      </ul>
+    </article>
+    <article class="canker">
+      <h4><span class="dot"></span><span data-i18n="id.c.h">黑头病 / 树干溃疡（疫霉）</span></h4>
+      <ul>
+        <li data-i18n="id.c.1">本身没有洞；树皮出现湿黑斑、流红褐色胶，有酸味</li>
+        <li data-i18n="id.c.2">病原是棕榈疫霉（Phytophthora palmivora），它不是真菌，是卵菌，和小蠹虫带的镰刀菌不是同一种</li>
+        <li data-i18n="id.c.3">但小蠹虫的针孔是它进树的门口，两者常同时出现</li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="key">
+    <b data-i18n="id.key.h">最重要的一点：针孔 = 病灶的记号</b>
+    <span data-i18n="id.key.t">小蠹虫专找受伤、根烂、积水的树，它闻着树里发出的酒精味来。所以一堆针孔的位置，几乎一定是树皮下面已经开始烂的地方 — 疫霉刚开始时看不见，但小蠹虫先替你找到了。用刀在针孔周围轻轻刮开树皮看一看。</span>
+  </div>
+
+  <div class="key">
+    <b data-i18n="id.trap.h">为什么本软件不用酒精陷阱</b>
+    <span data-i18n="id.trap.t">酒精会把 10–30 米内的小蠹虫引过来，挂在树旁边等于把虫引到那棵树上。本软件不用陷阱，改用雨后巡树头：看到新木屑就喷。</span>
+  </div>
+
+  <h3 data-i18n="id.fus.h">小蠹虫自己带来的病：梢枯</h3>
+  <p data-i18n="id.fus.t">小蠹虫体内有菌囊，钻洞时把镰刀菌（Fusarium solani、F. incarnatum）接种到洞壁上种来吃。泰国 2023 年的研究证实，这种菌会造成榴莲枝条枯死：叶黄脱落、枝梢树皮出现凹槽。所以一棵树可能同时有三个问题：虫、镰刀菌梢枯、疫霉烂根。行动方案会一起处理。</p>
+
+  <div class="btnrow" style="padding:8px 0 0"><button class="btn" onclick="go('grade')" data-i18n="id.go">下一步：给这棵树分级</button></div>
+</section>
+
+<!-- ================= GRADE ================= -->
+<section class="view" id="v-grade">
+  <h2 data-i18n="gr.h">这棵树有多严重？</h2>
+  <p class="lead" data-i18n="gr.lead">看树头到 1 米高的树干。四题选完，软件直接给你方案。</p>
+
+  <div class="q" data-q="holes">
+    <div class="qt" data-i18n="gr.q1">1. 针孔数量（树头到 1 米）</div>
+    <div class="opts">
+      <button data-v="0" data-i18n="gr.q1.0">没有</button>
+      <button data-v="1" data-i18n="gr.q1.1">1–10 个</button>
+      <button data-v="2" data-i18n="gr.q1.2">11–30 个</button>
+      <button data-v="3" data-i18n="gr.q1.3">30 个以上</button>
+    </div>
+  </div>
+  <div class="q" data-q="bark">
+    <div class="qt" data-i18n="gr.q2">2. 树皮状况</div>
+    <div class="opts one">
+      <button data-v="0" data-i18n="gr.q2.0">干燥，刮开是白色/淡色好木</button>
+      <button data-v="1" data-i18n="gr.q2.1">有流胶、湿黑斑，或刮开是褐色</button>
+      <button data-v="2" data-i18n="gr.q2.2">大片湿烂、树皮松脱、有臭味</button>
+    </div>
+  </div>
+  <div class="q" data-q="ring">
+    <div class="qt" data-i18n="gr.q3">3. 针孔和烂斑绕树干多少？</div>
+    <div class="opts">
+      <button data-v="0" data-i18n="gr.q3.0">不到 1/4 圈</button>
+      <button data-v="1" data-i18n="gr.q3.1">1/4 到 1/2 圈</button>
+      <button data-v="2" data-i18n="gr.q3.2">超过 1/2 圈</button>
+    </div>
+  </div>
+  <div class="q" data-q="canopy">
+    <div class="qt" data-i18n="gr.q4">4. 树冠</div>
+    <div class="opts one">
+      <button data-v="0" data-i18n="gr.q4.0">正常，叶色好</button>
+      <button data-v="1" data-i18n="gr.q4.1">部分黄叶、有枝梢枯死</button>
+      <button data-v="2" data-i18n="gr.q4.2">大部分枯死，或整棵已死</button>
+    </div>
+  </div>
+
+  <div class="result" id="gres">
+    <div class="big"><div class="ch" id="gch"></div><div class="lbl" id="glbl"></div></div>
+    <div class="why" id="gwhy"></div>
+    <div class="btnrow">
+      <button class="btn" onclick="planFromGrade()" data-i18n="gr.plan">看行动方案</button>
+      <button class="btn sec" onclick="saveFromGrade()" data-i18n="gr.save">保存这棵树到日程</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PLAN ================= -->
+<section class="view" id="v-plan">
+  <h2 data-i18n="pl.h">行动方案</h2>
+  <div class="gradepick" id="gpick">
+    <button class="p" data-g="prevent" data-i18n="g.prevent">预防</button>
+    <button class="l" data-g="light" data-i18n="g.light">轻</button>
+    <button class="m" data-g="mod" data-i18n="g.mod">中</button>
+    <button class="s" data-g="severe" data-i18n="g.severe">重</button>
+  </div>
+  <div id="planbox"></div>
+
+  <h3 data-i18n="pl.act.h">可以用什么药</h3>
+  <p class="note" data-i18n="pl.act.note">只列有效成分，不列牌子。用前请确认该成分已在马来西亚农药局（Lembaga Racun Makhluk Perosak）登记，并按标签的用量和安全期使用。</p>
+  <details>
+    <summary data-i18n="pl.act.s1">树干接触杀虫剂（喷树皮）</summary>
+    <div class="in">
+      <table>
+        <tr><th data-i18n="tb.active">有效成分</th><th data-i18n="tb.group">IRAC 组</th><th data-i18n="tb.hold">大约保护期</th></tr>
+        <tr><td>Cypermethrin 氯氰菊酯</td><td>3A</td><td data-i18n="tb.d14">约 14 天，雨季更短</td></tr>
+        <tr><td>Lambda-cyhalothrin 高效氯氟氰菊酯</td><td>3A</td><td data-i18n="tb.d14b">约 14 天，比氯氰菊酯耐晒</td></tr>
+        <tr><td>Deltamethrin 溴氰菊酯</td><td>3A</td><td data-i18n="tb.d14">约 14 天，雨季更短</td></tr>
+        <tr><td>Permethrin 氯菊酯</td><td>3A</td><td data-i18n="tb.d21">约 21 天（研究证实最耐久）</td></tr>
+        <tr><td>Fipronil 氟虫腈</td><td>2B</td><td data-i18n="tb.d21f">约 21 天；只喷树头树干，不可喷到花</td></tr>
+        <tr><td>Beauveria bassiana 白僵菌</td><td data-i18n="tb.bio">生物</td><td data-i18n="tb.bea">喷树头，让虫沾到孢子；有机可用，作用较慢</td></tr>
+      </table>
+      <ul>
+        <li data-i18n="pl.act.rot">轮替：3A → 2B → 3A。同一组不要连用超过两次。</li>
+        <li data-i18n="pl.act.stick">加展着剂/粘着剂，药留在树皮上更久。</li>
+        <li class="no" data-i18n="pl.act.no2">不要靠内吸药（吡虫啉、噻虫嗪等）：虫吃的是菌不是树汁，树皮上药效很短。</li>
+      </ul>
+    </div>
+  </details>
+  <details>
+    <summary data-i18n="pl.act.s2">针孔和烂斑的涂药</summary>
+    <div class="in">
+      <p data-i18n="pl.act.paste">泰国农业部做法：把接触杀虫剂（如氟虫腈 30 毫升兑 5 升水）和杀菌剂混合，用刷子涂在刮干净的烂斑和针孔上，两天后再涂一次。</p>
+      <p data-i18n="pl.act.fung">烂斑是疫霉引起的，杀菌剂请按 <a href="https://stanleywoosweeleong.github.io/duriantrunkdiseases/" target="_blank" rel="noopener">榴莲树干病辨症</a> 软件里的疫霉方案（亚磷酸盐、甲霜灵等）。</p>
+    </div>
+  </details>
+  <details>
+    <summary data-i18n="pl.spray.h">喷树干怎么喷</summary>
+    <div class="in">
+      <ul>
+        <li data-i18n="pl.spray.1">从土面喷到 2 米高，加上大枝分叉处，喷到树皮湿润流下为止。</li>
+        <li data-i18n="pl.spray.2">树皮干的时候喷，早上或傍晚，之后 6 小时不要下雨。喷后 24 小时内下大雨，要补喷。</li>
+        <li data-i18n="pl.spray.3">树头周围的杂草和覆盖物拨开 30 厘米，树头要透气。</li>
+        <li data-i18n="pl.spray.4">戴手套、口罩、长袖。药不要流进地里。</li>
+      </ul>
+    </div>
+  </details>
+</section>
+
+<!-- ================= SCHEDULE ================= -->
+<section class="view" id="v-sched">
+  <h2 data-i18n="sc.h">日程</h2>
+  <p class="lead" data-i18n="sc.lead">每棵树记一次喷药日期，软件替你算复喷、看树头和复检的日子。资料只存在这台手机。</p>
+  <div class="btnrow" style="padding:0 0 14px"><button class="btn" id="addBtn" data-i18n="sc.add">+ 加一棵树</button></div>
+
+  <form class="add" id="addForm" onsubmit="return false">
+    <label data-i18n="sc.f.name">树的名字或编号</label>
+    <input type="text" id="fName" maxlength="30" data-i18n-ph="sc.f.nameph" placeholder="例如：A区 12 号">
+    <label data-i18n="sc.f.grade">分级</label>
+    <div class="radio four" id="fGrade">
+      <button type="button" data-g="prevent" data-i18n="g.prevent">预防</button>
+      <button type="button" data-g="light" data-i18n="g.light">轻</button>
+      <button type="button" data-g="mod" data-i18n="g.mod">中</button>
+      <button type="button" data-g="severe" data-i18n="g.severe">重</button>
+    </div>
+    <label data-i18n="sc.f.group">这次喷的药</label>
+    <div class="radio" id="fGroup">
+      <button type="button" data-v="3A" data-i18n="sc.f.3a">菊酯类 3A（14 天）</button>
+      <button type="button" data-v="2B" data-i18n="sc.f.2b">氟虫腈 2B（21 天）</button>
+      <button type="button" data-v="3A21" data-i18n="sc.f.perm">氯菊酯 permethrin（21 天）</button>
+      <button type="button" data-v="BIO" data-i18n="sc.f.bio">白僵菌（14 天）</button>
+    </div>
+    <label data-i18n="sc.f.date">喷药日期</label>
+    <input type="date" id="fDate">
+    <div class="btnrow" style="padding:14px 0 0">
+      <button class="btn" onclick="addTree()" data-i18n="sc.f.save">保存</button>
+      <button class="btn sec" onclick="toggleAdd(false)" data-i18n="sc.f.cancel">取消</button>
+    </div>
+  </form>
+
+  <div class="trees" id="trees"></div>
+</section>
+</main>
+
+<nav>
+  <button data-view="id" class="on"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span data-i18n="nav.id">辨认</span></button>
+  <button data-view="grade"><svg viewBox="0 0 24 24"><path d="M4 19h16M6 15v-4M10 15V7M14 15v-2M18 15V5"/></svg><span data-i18n="nav.grade">分级</span></button>
+  <button data-view="plan"><svg viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m4 6 1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg><span data-i18n="nav.plan">行动</span></button>
+  <button data-view="sched"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span data-i18n="nav.sched">日程</span><span class="badge" id="dueBadge" style="display:none"></span></button>
+</nav>
+
+<footer>
+  <span data-i18n="ft.src">依据：Hulcr &amp; Stelinski 2017；Pongpisutta 等 2023；Reding &amp; Ranger 2018；泰国农业部推荐。</span>
+  <span id="ver"></span>
+  <button onclick="if(confirm(t('sc.clearq')))clearAll()" data-i18n="sc.clear">清除全部资料</button>
+</footer>
+<div class="toast" id="toast"></div>
+</div>
+
+<script>
+/* ===================================================================
+   榴莲蛀干小蠹 · Durian Borer Action
+   Single-file trilingual offline PWA. No branding, no product names.
+   ACTIVES: edit the table in the HTML above; only list actives whose
+   Malaysian Pesticides Board registration.
+   =================================================================== */
+const APP_VERSION='2026.0903.7';
+const LANGS=['zh','en','ms'];
+const LANG_LABEL={zh:'中文',en:'English',ms:'BM'};
+/* font size: 4 steps, persisted; base already differs by language */
+const FS_STEPS={zh:[16,19,22,26],en:[15,18,21,25],ms:[15,18,21,25]};
+const FS_LABEL=['A','A','A','A'];
+let fsIdx=+(localStorage.getItem('borer.fs')||1);
+function applyFont(){const px=FS_STEPS[lang][fsIdx];document.documentElement.style.setProperty('--fs',px+'px');
+  const b=document.getElementById('fontBtn');b.textContent='A';b.style.fontSize=(13+fsIdx*3)+'px';b.setAttribute('aria-label','Font size '+(fsIdx+1)+'/4');}
+document.getElementById('fontBtn').onclick=()=>{fsIdx=(fsIdx+1)%FS_STEPS.zh.length;localStorage.setItem('borer.fs',fsIdx);applyFont();toast(['小','中','大','特大'][fsIdx]+' / '+['S','M','L','XL'][fsIdx]);};
+
+/* ---------- strings ---------- */
+const S={
+'app.title':{zh:'榴莲蛀干小蠹',en:'Durian Borer Action',ms:'Kumbang Pengorek Durian'},
+'app.sub':{zh:'针孔蛀心虫 辨认 · 分级 · 行动 · 日程',en:'Pinhole borer · identify · grade · act · schedule',ms:'Pengorek lubang jarum · kenal · gred · tindakan · jadual'},
+'nav.id':{zh:'辨认',en:'Identify',ms:'Kenal'},
+'nav.grade':{zh:'分级',en:'Grade',ms:'Gred'},
+'nav.plan':{zh:'行动',en:'Plan',ms:'Tindakan'},
+'nav.sched':{zh:'日程',en:'Schedule',ms:'Jadual'},
+'g.prevent':{zh:'预防',en:'Prevent',ms:'Cegah'},
+'g.light':{zh:'轻',en:'Light',ms:'Ringan'},
+'g.mod':{zh:'中',en:'Moderate',ms:'Sederhana'},
+'g.severe':{zh:'重',en:'Severe',ms:'Teruk'},
+
+'id.h':{zh:'树干上的洞，是哪一种？',en:'Which kind of hole is on the trunk?',ms:'Lubang di batang itu jenis apa?'},
+'id.lead':{zh:'先分清楚。三种情况用药完全不同，用错了只会浪费钱和时间。',en:'Sort this out first. The three look similar but need completely different treatment; the wrong one wastes money and time.',ms:'Kenal pasti dahulu. Tiga keadaan ini perlukan rawatan berbeza; silap rawat hanya membazir wang dan masa.'},
+'id.b.h':{zh:'针孔蛀心虫（小蠹虫）',en:'Pinhole borer (ambrosia beetle)',ms:'Pengorek lubang jarum (kumbang ambrosia)'},
+'id.b.1':{zh:'洞口很小，1–2 毫米，像针扎的孔',en:'Tiny holes, 1–2 mm, like a needle prick',ms:'Lubang sangat kecil, 1–2 mm, seperti tusukan jarum'},
+'id.b.2':{zh:'洞口有细粉状木屑，有时挤成小圆柱（像牙签）',en:'Fine powdery frass at the hole, sometimes pushed out as a thin stick (“toothpick”)',ms:'Serbuk kayu halus di mulut lubang, kadang-kadang tersembul seperti lidi kecil'},
+'id.b.3':{zh:'很多孔聚在一起，多在树头到 1 米高，或大枝分叉处',en:'Many holes clustered together, usually collar to 1 m, or at big branch forks',ms:'Banyak lubang berkelompok, biasanya dari pangkal hingga 1 m, atau di cabang besar'},
+'id.b.4':{zh:'虫很小，2–3 毫米，黑褐色，很少看见',en:'Beetle is 2–3 mm, dark brown, rarely seen',ms:'Kumbang 2–3 mm, coklat gelap, jarang kelihatan'},
+'id.b.5':{zh:'虫不吃木头，在洞里种真菌吃菌 — 所以内吸药没用，药必须留在树皮上',en:'It does not eat wood; it farms fungus inside the gallery and eats that — so systemic insecticides do nothing, the chemical must sit on the bark',ms:'Ia tidak makan kayu; ia menanam kulat di dalam lubang dan makan kulat itu — jadi racun sistemik tidak berkesan, racun mesti berada di kulit batang'},
+'id.l.h':{zh:'天牛（钻心虫）',en:'Longhorn beetle (stem borer)',ms:'Kumbang bertanduk panjang (pengorek batang)'},
+'id.l.1':{zh:'洞口大，5–10 毫米以上，一棵树通常只有一两个',en:'Big hole, 5–10 mm or more, usually only one or two per tree',ms:'Lubang besar, 5–10 mm atau lebih, biasanya satu dua sahaja sepokok'},
+'id.l.2':{zh:'洞口有粗木屑、木丝，有时像锯屑堆成一堆',en:'Coarse wood chips and fibres at the hole, often in a heap like sawdust',ms:'Tatal kayu kasar dan serat di mulut lubang, sering bertimbun seperti habuk gergaji'},
+'id.l.3':{zh:'是幼虫直接吃木头，用铁线掏或削开树皮把虫挖出来',en:'The grub eats wood directly; hook it out with wire or cut the bark and remove it',ms:'Larva makan kayu terus; cungkil dengan dawai atau buka kulit dan keluarkan larva'},
+'id.l.4':{zh:'不是这个软件处理的对象',en:'Not covered by this tool',ms:'Tidak dirangkumi oleh perisian ini'},
+'id.c.h':{zh:'黑头病 / 树干溃疡（疫霉）',en:'Patch canker / black head (Phytophthora)',ms:'Kanser batang / kepala hitam (Phytophthora)'},
+'id.c.1':{zh:'本身没有洞；树皮出现湿黑斑、流红褐色胶，有酸味',en:'No holes by itself; wet dark patch on bark, reddish-brown gum, sour smell',ms:'Tiada lubang; tompok gelap lembap pada kulit, gam merah-coklat, bau masam'},
+'id.c.2':{zh:'病原是棕榈疫霉（Phytophthora palmivora），它不是真菌，是卵菌，和小蠹虫带的镰刀菌不是同一种',en:'Caused by Phytophthora palmivora — an oomycete, not a true fungus, and not the same organism as the Fusarium the beetle carries',ms:'Disebabkan Phytophthora palmivora — oomycete, bukan kulat sebenar, dan bukan organisma yang sama dengan Fusarium yang dibawa kumbang'},
+'id.c.3':{zh:'但小蠹虫的针孔是它进树的门口，两者常同时出现',en:'But the beetle’s pinholes are its doorway into the tree, so the two often appear together',ms:'Tetapi lubang jarum kumbang menjadi pintu masuknya, jadi kedua-duanya sering muncul bersama'},
+'id.key.h':{zh:'最重要的一点：针孔 = 病灶的记号',en:'The key point: a pinhole is a marker for a hidden lesion',ms:'Perkara paling penting: lubang jarum = penanda luka tersembunyi'},
+'id.key.t':{zh:'小蠹虫专找受伤、根烂、积水的树，它闻着树里发出的酒精味来。所以一堆针孔的位置，几乎一定是树皮下面已经开始烂的地方 — 疫霉刚开始时看不见，但小蠹虫先替你找到了。用刀在针孔周围轻轻刮开树皮看一看。',en:'Ambrosia beetles seek out wounded, root-rotted or waterlogged trees, following the alcohol smell stressed wood gives off. A cluster of pinholes almost always sits over bark that has already begun to rot underneath — early Phytophthora is invisible, but the beetle finds it for you. Gently scrape the bark around the holes with a knife and look.',ms:'Kumbang ambrosia mencari pokok yang cedera, reput akar atau bertakung air, mengikut bau alkohol dari kayu yang tertekan. Kelompok lubang jarum hampir pasti berada di atas kulit yang sudah mula reput di bawahnya — Phytophthora awal tidak kelihatan, tetapi kumbang menemukannya untuk anda. Kikis perlahan kulit di sekeliling lubang dengan pisau dan periksa.'},
+'id.trap.h':{zh:'为什么本软件不用酒精陷阱',en:'Why this tool does not use alcohol traps',ms:'Mengapa perisian ini tidak guna perangkap alkohol'},
+'id.trap.t':{zh:'酒精会把 10–30 米内的小蠹虫引过来，挂在树旁边等于把虫引到那棵树上。本软件不用陷阱，改用雨后巡树头：看到新木屑就喷。',en:'Ethanol draws ambrosia beetles from 10–30 m, so a trap beside a tree sends beetles into that tree. This tool skips traps and uses the collar patrol after rain instead: fresh frass means spray.',ms:'Etanol menarik kumbang ambrosia dari 10–30 m, jadi perangkap di sebelah pokok menghantar kumbang ke pokok itu. Perisian ini tidak guna perangkap dan menggunakan pemeriksaan pangkal selepas hujan: serbuk baru bermakna sembur.'},
+'id.fus.h':{zh:'小蠹虫自己带来的病：梢枯',en:'The disease the beetle brings itself: dieback',ms:'Penyakit yang dibawa kumbang sendiri: mati pucuk'},
+'id.fus.t':{zh:'小蠹虫体内有菌囊，钻洞时把镰刀菌（Fusarium solani、F. incarnatum）接种到洞壁上种来吃。泰国 2023 年的研究证实，这种菌会造成榴莲枝条枯死：叶黄脱落、枝梢树皮出现凹槽。所以一棵树可能同时有三个问题：虫、镰刀菌梢枯、疫霉烂根。行动方案会一起处理。',en:'The beetle carries Fusarium (F. solani, F. incarnatum) in a pouch called a mycangium and inoculates the gallery walls to farm it. A 2023 Thai study confirmed this fungus causes durian branch dieback: yellow leaves drop and the twig bark develops grooves. So one tree can have three problems at once — beetle, Fusarium dieback, Phytophthora rot. The action plan treats them together.',ms:'Kumbang membawa Fusarium (F. solani, F. incarnatum) dalam kantung bernama mycangium dan menanamnya pada dinding lubang. Kajian Thailand 2023 mengesahkan kulat ini menyebabkan mati pucuk durian: daun kuning gugur dan kulit ranting beralur. Jadi sepokok boleh ada tiga masalah serentak — kumbang, mati pucuk Fusarium, reput Phytophthora. Pelan tindakan merawat semuanya bersama.'},
+'id.go':{zh:'下一步：给这棵树分级',en:'Next: grade this tree',ms:'Seterusnya: gred pokok ini'},
+
+'gr.h':{zh:'这棵树有多严重？',en:'How bad is this tree?',ms:'Seteruk mana pokok ini?'},
+'gr.lead':{zh:'看树头到 1 米高的树干。四题选完，软件直接给你方案。',en:'Look at the trunk from the collar up to 1 m. Answer four questions and the plan is chosen for you.',ms:'Lihat batang dari pangkal hingga 1 m. Jawab empat soalan dan pelan dipilih untuk anda.'},
+'gr.q1':{zh:'1. 针孔数量（树头到 1 米）',en:'1. Number of pinholes (collar to 1 m)',ms:'1. Bilangan lubang jarum (pangkal hingga 1 m)'},
+'gr.q1.0':{zh:'没有',en:'None',ms:'Tiada'},
+'gr.q1.1':{zh:'1–10 个',en:'1–10',ms:'1–10'},
+'gr.q1.2':{zh:'11–30 个',en:'11–30',ms:'11–30'},
+'gr.q1.3':{zh:'30 个以上',en:'More than 30',ms:'Lebih 30'},
+'gr.q2':{zh:'2. 树皮状况',en:'2. Bark condition',ms:'2. Keadaan kulit batang'},
+'gr.q2.0':{zh:'干燥，刮开是白色/淡色好木',en:'Dry; scraped bark is pale, healthy wood',ms:'Kering; bila dikikis kayu pucat dan sihat'},
+'gr.q2.1':{zh:'有流胶、湿黑斑，或刮开是褐色',en:'Gum, wet dark patch, or scraped bark is brown',ms:'Ada gam, tompok gelap lembap, atau kayu coklat bila dikikis'},
+'gr.q2.2':{zh:'大片湿烂、树皮松脱、有臭味',en:'Large wet rot, bark loose, bad smell',ms:'Reput lembap meluas, kulit longgar, berbau busuk'},
+'gr.q3':{zh:'3. 针孔和烂斑绕树干多少？',en:'3. How far round the trunk do holes and rot reach?',ms:'3. Berapa jauh lubang dan reput mengelilingi batang?'},
+'gr.q3.0':{zh:'不到 1/4 圈',en:'Less than a quarter',ms:'Kurang satu perempat'},
+'gr.q3.1':{zh:'1/4 到 1/2 圈',en:'A quarter to a half',ms:'Satu perempat hingga separuh'},
+'gr.q3.2':{zh:'超过 1/2 圈',en:'More than half',ms:'Lebih separuh'},
+'gr.q4':{zh:'4. 树冠',en:'4. Canopy',ms:'4. Kanopi'},
+'gr.q4.0':{zh:'正常，叶色好',en:'Normal, good leaf colour',ms:'Normal, warna daun baik'},
+'gr.q4.1':{zh:'部分黄叶、有枝梢枯死',en:'Some yellow leaves, some twig dieback',ms:'Sebahagian daun kuning, ada ranting mati'},
+'gr.q4.2':{zh:'大部分枯死，或整棵已死',en:'Mostly dead, or the whole tree is dead',ms:'Kebanyakannya mati, atau seluruh pokok sudah mati'},
+'gr.plan':{zh:'看行动方案',en:'See the action plan',ms:'Lihat pelan tindakan'},
+'gr.save':{zh:'保存这棵树到日程',en:'Save this tree to the schedule',ms:'Simpan pokok ini ke jadual'},
+'gr.r.prevent':{zh:'目前没有虫害',en:'No borer damage now',ms:'Tiada serangan sekarang'},
+'gr.r.prevent.s':{zh:'做好预防，雨后巡树头',en:'Prevent and patrol collars after rain',ms:'Cegah dan periksa pangkal selepas hujan'},
+'gr.r.light':{zh:'轻度虫害',en:'Light attack',ms:'Serangan ringan'},
+'gr.r.light.s':{zh:'喷树干就能控制',en:'A trunk spray will control it',ms:'Semburan batang dapat mengawalnya'},
+'gr.r.mod':{zh:'中度：虫加烂斑',en:'Moderate: beetle plus lesion',ms:'Sederhana: kumbang serta luka reput'},
+'gr.r.mod.s':{zh:'要先处理树皮下的病',en:'Treat the disease under the bark first',ms:'Rawat penyakit di bawah kulit dahulu'},
+'gr.r.severe':{zh:'重度',en:'Severe',ms:'Teruk'},
+'gr.r.severe.s':{zh:'全力救治，继续观察',en:'Treat fully and keep watching',ms:'Rawat sepenuhnya dan terus pantau'},
+'gr.why.holes':{zh:'针孔多',en:'many holes',ms:'banyak lubang'},
+'gr.why.bark':{zh:'树皮有烂斑',en:'bark lesion',ms:'luka reput pada kulit'},
+'gr.why.bark2':{zh:'树皮大片腐烂',en:'large bark rot',ms:'reput kulit meluas'},
+'gr.why.ring':{zh:'绕干过半',en:'more than half the circumference',ms:'lebih separuh lilitan'},
+'gr.why.ring1':{zh:'绕干 1/4–1/2',en:'a quarter to half the circumference',ms:'satu perempat hingga separuh lilitan'},
+'gr.why.canopy':{zh:'树冠有枯梢',en:'canopy dieback',ms:'kanopi mati pucuk'},
+'gr.why.canopy2':{zh:'树冠大部分枯死',en:'canopy mostly dead',ms:'kanopi hampir mati'},
+'gr.why.pre':{zh:'依据：',en:'Because: ',ms:'Sebab: '},
+'gr.why.none':{zh:'树干干燥、无孔、树冠正常。',en:'Dry trunk, no holes, healthy canopy.',ms:'Batang kering, tiada lubang, kanopi sihat.'},
+'gr.why.light':{zh:'有针孔但树皮干燥、树冠正常。',en:'Pinholes present but bark is dry and canopy healthy.',ms:'Ada lubang tetapi kulit kering dan kanopi sihat.'},
+
+'pl.h':{zh:'行动方案',en:'Action plan',ms:'Pelan tindakan'},
+'pl.pick':{zh:'先在“分级”选一棵树，或在上面点一个等级。',en:'Grade a tree first, or tap a grade above.',ms:'Gred pokok dahulu, atau ketik satu gred di atas.'},
+'pl.act.h':{zh:'可以用什么药',en:'What can be used',ms:'Bahan yang boleh digunakan'},
+'pl.act.note':{zh:'只列有效成分，不列牌子。用前请确认该成分已在马来西亚农药局（Lembaga Racun Makhluk Perosak）登记，并按标签的用量和安全期使用。',en:'Active ingredients only, no brands. Before use, confirm the active is registered with the Malaysian Pesticides Board and follow the label rate and pre-harvest interval.',ms:'Bahan aktif sahaja, tanpa jenama. Sebelum guna, pastikan bahan aktif berdaftar dengan Lembaga Racun Makhluk Perosak Malaysia dan ikut kadar serta tempoh pra-tuai pada label.'},
+'pl.act.s1':{zh:'树干接触杀虫剂（喷树皮）',en:'Contact insecticide for the trunk (bark spray)',ms:'Racun serangga sentuh untuk batang (sembur kulit)'},
+'tb.active':{zh:'有效成分',en:'Active',ms:'Bahan aktif'},
+'tb.group':{zh:'IRAC 组',en:'IRAC group',ms:'Kumpulan IRAC'},
+'tb.hold':{zh:'大约保护期',en:'Approx. protection',ms:'Anggaran perlindungan'},
+'tb.d14':{zh:'约 14 天，雨季更短',en:'About 14 days, less in the wet season',ms:'Lebih kurang 14 hari, lebih pendek musim hujan'},
+'tb.d14b':{zh:'约 14 天，比氯氰菊酯耐晒',en:'About 14 days, more sun-stable than cypermethrin',ms:'Lebih kurang 14 hari, lebih tahan cahaya daripada cypermethrin'},
+'tb.d21':{zh:'约 21 天（研究证实最耐久）',en:'About 21 days (longest residual in trials)',ms:'Lebih kurang 21 hari (paling tahan lama dalam kajian)'},
+'tb.d21f':{zh:'约 21 天；只喷树头树干，不可喷到花',en:'About 21 days; collar and trunk only, never onto flowers',ms:'Lebih kurang 21 hari; pangkal dan batang sahaja, jangan kena bunga'},
+'tb.bio':{zh:'生物',en:'Biological',ms:'Biologi'},
+'tb.bea':{zh:'喷树头，让虫沾到孢子；有机可用，作用较慢',en:'Spray the collar so adults pick up spores; organic-compatible, slower acting',ms:'Sembur pangkal supaya kumbang dewasa kena spora; sesuai organik, bertindak lebih perlahan'},
+'pl.act.rot':{zh:'轮替：3A → 2B → 3A。同一组不要连用超过两次。',en:'Rotate: 3A → 2B → 3A. Never use the same group more than twice in a row.',ms:'Giliran: 3A → 2B → 3A. Jangan guna kumpulan sama lebih dua kali berturut-turut.'},
+'pl.act.stick':{zh:'加展着剂/粘着剂，药留在树皮上更久。',en:'Add a sticker/spreader so the chemical stays on the bark longer.',ms:'Tambah bahan pelekat supaya racun lebih lama pada kulit batang.'},
+'pl.act.no2':{zh:'不要靠内吸药（吡虫啉、噻虫嗪等）：虫吃的是菌不是树汁，树皮上药效很短。',en:'Do not rely on systemics (imidacloprid, thiamethoxam etc.): the beetle eats fungus, not sap, and bark exposure is too brief.',ms:'Jangan bergantung pada racun sistemik (imidacloprid, thiamethoxam dll.): kumbang makan kulat, bukan getah, dan pendedahan pada kulit terlalu singkat.'},
+'pl.act.s2':{zh:'针孔和烂斑的涂药',en:'Painting holes and lesions',ms:'Menyapu lubang dan luka reput'},
+'pl.act.paste':{zh:'泰国农业部做法：把接触杀虫剂（如氟虫腈 30 毫升兑 5 升水）和杀菌剂混合，用刷子涂在刮干净的烂斑和针孔上，两天后再涂一次。',en:'Thai Department of Agriculture method: mix a contact insecticide (e.g. fipronil 30 ml in 5 L water) with a fungicide and brush it onto the cleaned lesion and holes; repeat after two days.',ms:'Kaedah Jabatan Pertanian Thailand: campur racun serangga sentuh (cth. fipronil 30 ml dalam 5 L air) dengan racun kulat dan sapu pada luka yang telah dibersihkan dan lubang; ulang selepas dua hari.'},
+'pl.act.fung':{zh:'烂斑是疫霉引起的，杀菌剂请按 <a href="https://stanleywoosweeleong.github.io/duriantrunkdiseases/" target="_blank" rel="noopener">榴莲树干病辨症</a> 软件里的疫霉方案（亚磷酸盐、甲霜灵等）。',en:'The lesion is Phytophthora; choose the fungicide from the Phytophthora plan in the <a href="https://stanleywoosweeleong.github.io/duriantrunkdiseases/" target="_blank" rel="noopener">Durian Trunk Disease Triage</a> tool (phosphonate, metalaxyl etc.).',ms:'Luka reput itu Phytophthora; pilih racun kulat daripada pelan Phytophthora dalam perisian <a href="https://stanleywoosweeleong.github.io/duriantrunkdiseases/" target="_blank" rel="noopener">Durian Trunk Disease Triage</a> (fosfonat, metalaxyl dll.).'},
+'pl.spray.h':{zh:'喷树干怎么喷',en:'How to spray the trunk',ms:'Cara menyembur batang'},
+'pl.spray.1':{zh:'从土面喷到 2 米高，加上大枝分叉处，喷到树皮湿润流下为止。',en:'From soil level to 2 m plus the big branch forks; wet the bark until it runs.',ms:'Dari paras tanah hingga 2 m serta cabang besar; basahkan kulit hingga mengalir.'},
+'pl.spray.2':{zh:'树皮干的时候喷，早上或傍晚，之后 6 小时不要下雨。喷后 24 小时内下大雨，要补喷。',en:'Spray on dry bark, morning or late afternoon, with no rain for 6 hours after. Heavy rain within 24 hours means spray again.',ms:'Sembur pada kulit kering, pagi atau petang, tanpa hujan 6 jam selepasnya. Hujan lebat dalam 24 jam bermakna sembur semula.'},
+'pl.spray.3':{zh:'树头周围的杂草和覆盖物拨开 30 厘米，树头要透气。',en:'Clear weeds and mulch 30 cm back from the collar; the collar must breathe.',ms:'Bersihkan rumpai dan sungkupan 30 cm dari pangkal; pangkal perlu bernafas.'},
+'pl.spray.4':{zh:'戴手套、口罩、长袖。药不要流进地里。',en:'Gloves, mask, long sleeves. Do not let run-off soak into the soil.',ms:'Sarung tangan, topeng, lengan panjang. Jangan biar racun mengalir ke tanah.'},
+
+'sc.h':{zh:'日程',en:'Schedule',ms:'Jadual'},
+'sc.lead':{zh:'每棵树记一次喷药日期，软件替你算复喷、看树头和复检的日子。资料只存在这台手机。',en:'Record one spray date per tree and the re-spray, collar-check and re-grade dates are worked out for you. Data stays on this phone only.',ms:'Rekod satu tarikh semburan sepokok dan tarikh sembur semula, periksa pangkal dan gred semula dikira untuk anda. Data disimpan di telefon ini sahaja.'},
+'sc.add':{zh:'+ 加一棵树',en:'+ Add a tree',ms:'+ Tambah pokok'},
+'sc.f.name':{zh:'树的名字或编号',en:'Tree name or number',ms:'Nama atau nombor pokok'},
+'sc.f.nameph':{zh:'例如：A区 12 号',en:'e.g. Block A no. 12',ms:'cth. Blok A no. 12'},
+'sc.f.grade':{zh:'分级',en:'Grade',ms:'Gred'},
+'sc.f.group':{zh:'这次喷的药',en:'What was sprayed',ms:'Racun yang disembur'},
+'sc.f.3a':{zh:'菊酯类 3A（14 天）',en:'Pyrethroid 3A (14 days)',ms:'Piretroid 3A (14 hari)'},
+'sc.f.2b':{zh:'氟虫腈 2B（21 天）',en:'Fipronil 2B (21 days)',ms:'Fipronil 2B (21 hari)'},
+'sc.f.perm':{zh:'氯菊酯 permethrin（21 天）',en:'Permethrin (21 days)',ms:'Permethrin (21 hari)'},
+'sc.f.bio':{zh:'白僵菌（14 天）',en:'Beauveria (14 days)',ms:'Beauveria (14 hari)'},
+'sc.f.date':{zh:'喷药日期',en:'Spray date',ms:'Tarikh semburan'},
+'sc.f.save':{zh:'保存',en:'Save',ms:'Simpan'},
+'sc.f.cancel':{zh:'取消',en:'Cancel',ms:'Batal'},
+'sc.empty':{zh:'还没有记录。在“分级”做完一棵树后按“保存到日程”，或按上面“加一棵树”。',en:'No trees yet. Grade a tree and tap “Save to schedule”, or tap “Add a tree” above.',ms:'Belum ada pokok. Gred pokok dan ketik “Simpan ke jadual”, atau ketik “Tambah pokok” di atas.'},
+'sc.need':{zh:'请填名字、分级、药和日期。',en:'Please fill in name, grade, chemical and date.',ms:'Sila isi nama, gred, racun dan tarikh.'},
+'sc.saved':{zh:'已保存',en:'Saved',ms:'Disimpan'},
+'sc.done':{zh:'完成',en:'Done',ms:'Selesai'},
+'sc.undo':{zh:'撤销',en:'Undo',ms:'Buat asal'},
+'sc.del':{zh:'删除这棵树',en:'Delete this tree',ms:'Padam pokok ini'},
+'sc.delq':{zh:'删除这棵树的记录？',en:'Delete this tree’s record?',ms:'Padam rekod pokok ini?'},
+'sc.clear':{zh:'清除全部资料',en:'Clear all data',ms:'Padam semua data'},
+'sc.clearq':{zh:'清除全部树的记录？不能恢复。',en:'Clear all tree records? This cannot be undone.',ms:'Padam semua rekod pokok? Tidak boleh dikembalikan.'},
+'sc.next':{zh:'下一件事',en:'Next',ms:'Seterusnya'},
+'sc.overdue':{zh:'已过期',en:'overdue',ms:'lewat'},
+'sc.today':{zh:'今天',en:'today',ms:'hari ini'},
+'sc.days':{zh:'天后',en:'days',ms:'hari lagi'},
+'sc.alldone':{zh:'这轮完成，复检后重新分级',en:'Round complete; re-grade after checking',ms:'Pusingan selesai; gred semula selepas periksa'},
+'sc.sprayed':{zh:'喷药',en:'Sprayed',ms:'Sembur'},
+'sc.newround':{zh:'记录新一轮喷药',en:'Record next spray',ms:'Rekod semburan seterusnya'},
+'ev.respray':{zh:'复喷树干 — 轮替到',en:'Re-spray trunk — rotate to',ms:'Sembur semula batang — tukar ke'},
+'ev.trap':{zh:'看树头针孔有没有新木屑',en:'Check the collar for fresh frass',ms:'Periksa pangkal untuk serbuk baru'},
+'ev.paint2':{zh:'烂斑第二次涂药',en:'Second painting of the lesion',ms:'Sapuan kedua pada luka reput'},
+'ev.regrade':{zh:'复检：重新做一次分级',en:'Re-check: grade the tree again',ms:'Periksa semula: gred pokok sekali lagi'},
+'ev.phos':{zh:'疫霉第二次处理（按树干病辨症软件）',en:'Second Phytophthora treatment (see Trunk Disease Triage)',ms:'Rawatan Phytophthora kedua (lihat Trunk Disease Triage)'},
+'ev.canopy':{zh:'看树冠有没有新叶',en:'Check the canopy for new leaves',ms:'Periksa kanopi untuk daun baru'},
+'grp.3A':{zh:'菊酯类 3A',en:'pyrethroid 3A',ms:'piretroid 3A'},
+'grp.2B':{zh:'氟虫腈 2B',en:'fipronil 2B',ms:'fipronil 2B'},
+'grp.3A21':{zh:'氯菊酯 3A',en:'permethrin 3A',ms:'permethrin 3A'},
+'grp.BIO':{zh:'白僵菌',en:'Beauveria',ms:'Beauveria'},
+'ft.src':{zh:'依据：Hulcr & Stelinski 2017；Pongpisutta 等 2023；Reding & Ranger 2018；泰国农业部推荐。',en:'Sources: Hulcr & Stelinski 2017; Pongpisutta et al. 2023; Reding & Ranger 2018; Thai DOA guidance.',ms:'Sumber: Hulcr & Stelinski 2017; Pongpisutta et al. 2023; Reding & Ranger 2018; panduan DOA Thailand.'},
+};
+
+/* ---------- plans: [title, detail] per step ---------- */
+const PLANS={
+prevent:{
+ zh:[['把树头弄透气','树头周围 30 厘米不要堆覆盖物、不要积水；排水沟要通。'],
+     ['不要伤树','修枝、除草、割胶都会留伤口引虫。剪口马上封，雨季不要重剪。'],
+     ['雨后巡树头（这是主要监测）','连续下雨后一星期内，绕每棵树头看一圈有没有新木屑。看到新木屑，3 天内喷树干。'],
+     ['可选：白僵菌喷树头','有机园或靠近开花树的树，每月喷一次树头作保护。']],
+ en:[['Let the collar breathe','Keep mulch and weeds 30 cm off the collar, no standing water, drains clear.'],
+     ['Do not wound the tree','Pruning, weeding and tapping wounds attract beetles. Seal cuts at once; no heavy pruning in the wet season.'],
+     ['Walk the collars after rain (main monitoring)','Within a week of a wet spell, check every collar for fresh frass. Fresh frass means spray trunks within 3 days.'],
+     ['Optional: Beauveria on the collar','For organic blocks or trees near flowering, a monthly collar spray as protection.']],
+ ms:[['Biar pangkal bernafas','Jauhkan sungkupan dan rumpai 30 cm dari pangkal, tiada air bertakung, parit lancar.'],
+     ['Jangan cederakan pokok','Luka cantasan, merumput dan menoreh menarik kumbang. Tutup luka segera; jangan cantas berat musim hujan.'],
+     ['Periksa pangkal selepas hujan (pemantauan utama)','Dalam seminggu selepas hujan berpanjangan, periksa setiap pangkal untuk serbuk baru. Serbuk baru bermakna sembur batang dalam 3 hari.'],
+     ['Pilihan: Beauveria pada pangkal','Untuk blok organik atau pokok berhampiran bunga, semburan pangkal bulanan sebagai perlindungan.']]},
+light:{
+ zh:[['刮开针孔周围看一看','用刀把针孔周围的树皮轻轻刮开 1 厘米。如果是白色好木，就是轻度；如果是褐色湿的，改选“树皮有烂斑”重新分级。'],
+     ['喷树干接触杀虫剂','菊酯类（3A）或氟虫腈（2B），从土面到 2 米，喷到湿润流下。加粘着剂。'],
+     ['每 7 天看树头','看针孔有没有新的木屑。有新木屑就是虫还在活动。'],
+     ['14–21 天复喷，换组','菊酯类 14 天、氟虫腈 21 天。复喷时换另一组。'],
+     ['30 天后复检','重新分级。针孔没有新木屑、树皮仍干燥，就停止喷药，改为预防。']],
+ en:[['Scrape around the holes and look','Gently open the bark 1 cm around the holes. Pale sound wood means light; brown wet wood means go back and choose “bark lesion”.'],
+     ['Trunk spray with a contact insecticide','Pyrethroid (3A) or fipronil (2B), soil level to 2 m, wet to run-off. Add a sticker.'],
+     ['Check the collar every 7 days','Look for fresh frass at the holes. Fresh frass means beetles are still active.'],
+     ['Re-spray at 14–21 days, other group','14 days for pyrethroids, 21 for fipronil. Switch group at each re-spray.'],
+     ['Re-check at 30 days','Grade again. No fresh frass and dry bark means stop spraying and move to prevention.']],
+ ms:[['Kikis sekeliling lubang dan periksa','Buka kulit 1 cm sekeliling lubang. Kayu pucat sihat bermakna ringan; kayu coklat lembap bermakna pilih semula “luka reput pada kulit”.'],
+     ['Sembur batang dengan racun sentuh','Piretroid (3A) atau fipronil (2B), paras tanah hingga 2 m, basah hingga mengalir. Tambah pelekat.'],
+     ['Periksa pangkal setiap 7 hari','Cari serbuk baru pada lubang. Serbuk baru bermakna kumbang masih aktif.'],
+     ['Sembur semula 14–21 hari, tukar kumpulan','14 hari untuk piretroid, 21 untuk fipronil. Tukar kumpulan setiap semburan semula.'],
+     ['Periksa semula pada hari ke-30','Gred semula. Tiada serbuk baru dan kulit kering bermakna berhenti sembur dan beralih ke pencegahan.']]},
+mod:{
+ zh:[['找到病灶，刮干净','从针孔最密的地方刮开树皮，一直刮到看见白色/淡色好木，边缘再多刮 2 厘米。刮下来的烂皮拿出园外烧掉。'],
+     ['涂药封洞','接触杀虫剂 + 杀菌剂混合，刷在刮开的地方和所有针孔上。两天后再涂一次。'],
+     ['处理疫霉','这个烂斑就是疫霉。按“榴莲树干病辨症”软件的疫霉方案：亚磷酸盐树干注射或甲霜灵淋根。'],
+     ['喷树干','和轻度一样：菊酯类或氟虫腈，土面到 2 米，加粘着剂。'],
+     ['剪掉枯梢','枯死的枝梢剪到健康处，剪口封好，剪下的枝条烧掉，不要留在园里。'],
+     ['树头排水、透气','拨开覆盖物 30 厘米，挖通排水，雨季不要让树头泡水。'],
+     ['14–21 天复喷，30 天复检','复喷换组。30 天重新分级：烂斑边缘长出新皮就是在好转。'],
+     ['不要砍树','这级的树大多数能救回来。活着的树继续治、继续看。']],
+ en:[['Find the lesion and clean it','Open the bark where the holes are densest and keep scraping until you reach pale sound wood, then 2 cm more. Carry the rotten bark out of the orchard and burn it.'],
+     ['Paint and seal','Contact insecticide + fungicide mix brushed onto the cleaned area and every hole. Repeat after two days.'],
+     ['Treat the Phytophthora','This lesion is Phytophthora. Follow the Phytophthora plan in the Trunk Disease Triage tool: phosphonate injection or metalaxyl drench.'],
+     ['Trunk spray','As for light: pyrethroid or fipronil, soil to 2 m, with sticker.'],
+     ['Cut out dieback','Prune dead twigs back to healthy wood, seal cuts, burn the prunings; never leave them in the orchard.'],
+     ['Drain and air the collar','Pull mulch back 30 cm, open drains, never let the collar sit in water in the wet season.'],
+     ['Re-spray at 14–21 days, re-check at 30','Switch group at re-spray. At 30 days grade again: new bark growing at the lesion edge means it is recovering.'],
+     ['Do not cut the tree down','Most trees at this grade recover. A living tree is treated and watched.']],
+ ms:[['Cari luka reput dan bersihkan','Buka kulit di tempat lubang paling padat dan terus kikis hingga kayu pucat sihat, kemudian 2 cm lagi. Bawa kulit reput keluar dari kebun dan bakar.'],
+     ['Sapu dan tutup','Campuran racun serangga sentuh + racun kulat disapu pada kawasan yang dibersihkan dan setiap lubang. Ulang selepas dua hari.'],
+     ['Rawat Phytophthora','Luka ini adalah Phytophthora. Ikut pelan Phytophthora dalam perisian Trunk Disease Triage: suntikan fosfonat atau siraman metalaxyl.'],
+     ['Sembur batang','Seperti ringan: piretroid atau fipronil, tanah hingga 2 m, dengan pelekat.'],
+     ['Buang ranting mati','Cantas ranting mati hingga kayu sihat, tutup luka, bakar cantasan; jangan tinggal di kebun.'],
+     ['Saliran dan udara pada pangkal','Tolak sungkupan 30 cm, buka parit, jangan biar pangkal bertakung air musim hujan.'],
+     ['Sembur semula 14–21 hari, periksa semula pada 30','Tukar kumpulan setiap sembur semula. Pada hari ke-30 gred semula: kulit baru tumbuh di tepi luka bermakna pokok pulih.'],
+     ['Jangan tebang pokok','Kebanyakan pokok gred ini pulih. Pokok hidup dirawat dan dipantau.']]},
+severe:{
+ zh:[['先确定树是不是活的','刮树皮：有绿色/白色活层、有新芽，就是活的，照下面做。整棵已死、树皮全干脱落，才跳到第 8 步。'],
+     ['全部烂斑刮干净','绕树干把所有烂斑刮到好木，烂皮烧掉。刮完的面积大也不要紧，比留着烂好。'],
+     ['涂药封洞，两天后再涂','接触杀虫剂 + 杀菌剂，刷满所有刮开处和针孔。'],
+     ['疫霉全套处理','按“榴莲树干病辨症”软件的疫霉方案，树干注射加淋根，21 天后再做一次。'],
+     ['喷树干，14 天复喷','重度树是虫的繁殖场，这轮按最短间隔喷，换组轮替。'],
+     ['重剪枯枝，减轻负担','枯梢全部剪掉、烧掉。正在挂果就疏果或全部摘掉，让树先活。'],
+     ['30 天和 90 天复检','有新叶、烂斑边缘长新皮，就继续；90 天没有任何新叶，再考虑第 8 步。'],
+     ['只有死树才砍','死树是小蠹虫的繁殖场，一确定死了就尽快砍掉烧掉，不要留在园里。活着的树不砍。']],
+ en:[['First confirm the tree is alive','Scrape bark: green/white living layer or new shoots means alive — follow the steps below. Only a fully dead tree with dry peeling bark goes straight to step 8.'],
+     ['Clean every lesion','Work round the trunk scraping all rot back to sound wood; burn the bark. A large cleaned area is better than rot left behind.'],
+     ['Paint and seal, repeat in two days','Contact insecticide + fungicide over every cleaned area and hole.'],
+     ['Full Phytophthora treatment','Follow the Phytophthora plan in the Trunk Disease Triage tool: trunk injection plus drench, repeated after 21 days.'],
+     ['Trunk spray, re-spray at 14 days','A severe tree is a beetle nursery: use the shortest interval this round, rotating groups.'],
+     ['Cut dead wood hard, lighten the load','Remove and burn all dieback. If fruiting, thin or strip the fruit so the tree can recover first.'],
+     ['Re-check at 30 and 90 days','New leaves or new bark at lesion edges means keep going. No new leaf at all by 90 days — then consider step 8.'],
+     ['Only a dead tree is cut','Dead trees breed beetles: once confirmed dead, fell and burn quickly. A living tree is never cut.']],
+ ms:[['Pastikan dahulu pokok masih hidup','Kikis kulit: lapisan hijau/putih hidup atau pucuk baru bermakna hidup — ikut langkah di bawah. Hanya pokok yang mati sepenuhnya dengan kulit kering mengelupas terus ke langkah 8.'],
+     ['Bersihkan semua luka reput','Kelilingi batang dan kikis semua reput hingga kayu sihat; bakar kulit. Kawasan besar yang bersih lebih baik daripada reput tertinggal.'],
+     ['Sapu dan tutup, ulang dua hari','Racun serangga sentuh + racun kulat pada setiap kawasan bersih dan lubang.'],
+     ['Rawatan Phytophthora penuh','Ikut pelan Phytophthora dalam perisian Trunk Disease Triage: suntikan batang serta siraman, ulang selepas 21 hari.'],
+     ['Sembur batang, sembur semula 14 hari','Pokok teruk ialah tempat pembiakan kumbang: guna selang terpendek pusingan ini, tukar kumpulan.'],
+     ['Cantas kayu mati, ringankan beban','Buang dan bakar semua ranting mati. Jika berbuah, jarangkan atau buang buah supaya pokok pulih dahulu.'],
+     ['Periksa semula pada 30 dan 90 hari','Daun baru atau kulit baru di tepi luka bermakna teruskan. Tiada daun baru langsung pada 90 hari — barulah pertimbangkan langkah 8.'],
+     ['Hanya pokok mati ditebang','Pokok mati membiakkan kumbang: setelah disahkan mati, tebang dan bakar segera. Pokok hidup tidak ditebang.']]}
+};
+
+/* ---------- state ---------- */
+const KEY='borer.v1';
+let lang=localStorage.getItem('borer.lang')||'zh';
+let ans={};
+let curGrade=null;
+let db=load();
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{trees:[]}}catch(e){return{trees:[]}}}
+function save(){localStorage.setItem(KEY,JSON.stringify(db))}
+function t(k){const o=S[k];return o?(o[lang]||o.zh):k}
+
+/* ---------- i18n ---------- */
+function applyLang(){
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{el.innerHTML=t(el.dataset.i18n)});
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{el.placeholder=t(el.dataset.i18nPh)});
+  document.getElementById('langBtn').textContent=LANG_LABEL[lang];
+  document.title=t('app.title');
+  applyFont();
+  if(curGrade){showGradeResult();}
+  renderPlan();renderTrees();
+}
+document.getElementById('langBtn').onclick=()=>{lang=LANGS[(LANGS.indexOf(lang)+1)%LANGS.length];localStorage.setItem('borer.lang',lang);applyLang();};
+
+/* ---------- navigation ---------- */
+function go(v){
+  document.querySelectorAll('section.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.view===v));
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>go(b.dataset.view));
+
+/* ---------- grading ---------- */
+document.querySelectorAll('#v-grade .q').forEach(q=>{
+  q.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+    q.querySelectorAll('button').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');
+    ans[q.dataset.q]=+b.dataset.v;compute();
+  });
+});
+function compute(){
+  if(['holes','bark','ring','canopy'].some(k=>ans[k]===undefined))return;
+  const {holes,bark,ring,canopy}=ans;let g,why=[];
+  if(bark===2||ring===2||canopy===2){g='severe';
+    if(bark===2)why.push(t('gr.why.bark2'));if(ring===2)why.push(t('gr.why.ring'));if(canopy===2)why.push(t('gr.why.canopy2'));}
+  else if(bark===1||holes===3||ring===1||canopy===1){g='mod';
+    if(bark===1)why.push(t('gr.why.bark'));if(holes===3)why.push(t('gr.why.holes'));if(ring===1)why.push(t('gr.why.ring1'));if(canopy===1)why.push(t('gr.why.canopy'));}
+  else if(holes===0){g='prevent';}
+  else{g='light';}
+  curGrade=g;curWhy=why;showGradeResult();
+}
+let curWhy=[];
+const GCH={prevent:'防',light:'轻',mod:'中',severe:'重'};
+const GCHen={prevent:'P',light:'L',mod:'M',severe:'S'};
+function gch(g){return lang==='zh'?GCH[g]:GCHen[g]}
+function showGradeResult(){
+  const r=document.getElementById('gres');r.className='result on g-'+curGrade;
+  document.getElementById('gch').textContent=gch(curGrade);
+  document.getElementById('glbl').innerHTML=t('gr.r.'+curGrade)+'<small>'+t('gr.r.'+curGrade+'.s')+'</small>';
+  let w=curWhy.length?t('gr.why.pre')+curWhy.join(lang==='zh'?'、':', ')+(lang==='zh'?'。':'.'):(curGrade==='prevent'?t('gr.why.none'):t('gr.why.light'));
+  document.getElementById('gwhy').textContent=w;
+  r.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function planFromGrade(){planGrade=curGrade;renderPlan();go('plan');}
+function saveFromGrade(){go('sched');toggleAdd(true);setRadio('fGrade','g',curGrade);document.getElementById('fName').focus();}
+
+/* ---------- plan ---------- */
+let planGrade=null;
+document.querySelectorAll('#gpick button').forEach(b=>b.onclick=()=>{planGrade=b.dataset.g;renderPlan();});
+function renderPlan(){
+  document.querySelectorAll('#gpick button').forEach(b=>b.classList.toggle('sel',b.dataset.g===planGrade));
+  const box=document.getElementById('planbox');
+  if(!planGrade){box.innerHTML='<p class="lead">'+t('pl.pick')+'</p>';return;}
+  const steps=PLANS[planGrade][lang]||PLANS[planGrade].zh;
+  box.className='p-'+planGrade;
+  box.innerHTML='<ol class="steps">'+steps.map(s=>'<li><b>'+s[0]+'</b><span>'+s[1]+'</span></li>').join('')+'</ol>';
+}
+
+/* ---------- schedule ---------- */
+const INTERVAL={'3A':14,'2B':21,'3A21':21,'BIO':14};
+const ROT={'3A':'2B','2B':'3A','3A21':'2B','BIO':'3A'};
+function toggleAdd(on){document.getElementById('addForm').classList.toggle('on',on);if(on&&!document.getElementById('fDate').value)document.getElementById('fDate').value=today();}
+document.getElementById('addBtn').onclick=()=>toggleAdd(true);
+function setRadio(id,attr,val){document.querySelectorAll('#'+id+' button').forEach(b=>b.classList.toggle('sel',b.dataset[attr]===val));}
+['fGrade','fGroup'].forEach(id=>document.querySelectorAll('#'+id+' button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#'+id+' button').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');
+}));
+function today(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function addDays(iso,n){const d=new Date(iso+'T00:00:00');d.setDate(d.getDate()+n);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function dayDiff(iso){return Math.round((new Date(iso+'T00:00:00')-new Date(today()+'T00:00:00'))/86400000)}
+function makeEvents(grade,group,date){
+  const iv=grade==='severe'?14:INTERVAL[group];const ev=[];
+  ev.push({d:date,k:'spray',g:group,done:true});
+  if(grade==='mod'||grade==='severe')ev.push({d:addDays(date,2),k:'paint2'});
+  for(let i=7;i<iv;i+=7)ev.push({d:addDays(date,i),k:'trap'});
+  ev.push({d:addDays(date,iv),k:'respray',g:ROT[group]});
+  if(grade==='severe')ev.push({d:addDays(date,21),k:'phos'});
+  ev.push({d:addDays(date,30),k:'regrade'});
+  if(grade==='severe')ev.push({d:addDays(date,90),k:'canopy'});
+  return ev.sort((a,b)=>a.d<b.d?-1:1);
+}
+function addTree(){
+  const name=document.getElementById('fName').value.trim();
+  const g=(document.querySelector('#fGrade button.sel')||{}).dataset;const gr=g?g.g:null;
+  const p=(document.querySelector('#fGroup button.sel')||{}).dataset;const grp=p?p.v:null;
+  const date=document.getElementById('fDate').value;
+  if(!name||!gr||!grp||!date){toast(t('sc.need'));return;}
+  db.trees.unshift({id:Date.now(),name,grade:gr,group:grp,date,ev:makeEvents(gr,grp,date),open:true});
+  save();toggleAdd(false);document.getElementById('fName').value='';
+  document.querySelectorAll('#fGrade button,#fGroup button').forEach(b=>b.classList.remove('sel'));
+  renderTrees();toast(t('sc.saved'));
+}
+function evText(e){
+  if(e.k==='spray')return t('sc.sprayed')+' — '+t('grp.'+e.g);
+  if(e.k==='respray')return t('ev.respray')+' '+t('grp.'+e.g);
+  return t('ev.'+e.k);
+}
+function fmtD(iso){const d=new Date(iso+'T00:00:00');const m=lang==='zh'?(d.getMonth()+1)+'月'+d.getDate()+'日':d.getDate()+'/'+(d.getMonth()+1);return m}
+function renderTrees(){
+  const box=document.getElementById('trees');let dueCount=0;
+  if(!db.trees.length){box.innerHTML='<div class="empty">'+t('sc.empty')+'</div>';updateBadge(0);return;}
+  box.innerHTML=db.trees.map(tr=>{
+    const next=tr.ev.find(e=>!e.done);let dueHtml,cls='';
+    if(next){const dd=dayDiff(next.d);if(dd<0){cls='over';dueCount++;dueHtml='<b>'+fmtD(next.d)+'</b><span>'+t('sc.overdue')+'</span>'}
+      else if(dd===0){cls='today';dueCount++;dueHtml='<b>'+t('sc.today')+'</b><span>'+t('sc.next')+'</span>'}
+      else dueHtml='<b>'+fmtD(next.d)+'</b><span>'+dd+' '+t('sc.days')+'</span>';}
+    else dueHtml='<span>'+t('sc.alldone')+'</span>';
+    const evs=tr.ev.map((e,i)=>{const dd=dayDiff(e.d);const over=!e.done&&dd<0;
+      return '<div class="ev '+(e.done?'done':'')+(over?' over':'')+'"><div class="d">'+fmtD(e.d)+'</div><div class="t">'+evText(e)+'</div>'+
+        (e.k==='spray'?'':'<button onclick="markEv('+tr.id+','+i+')">'+(e.done?t('sc.undo'):t('sc.done'))+'</button>')+'</div>'}).join('');
+    return '<div class="tree '+(tr.open?'open':'')+'"><div class="th" onclick="toggleTree('+tr.id+')">'+
+      '<div class="gch g-'+tr.grade+'" style="background:var(--g-'+tr.grade+')">'+gch(tr.grade)+'</div>'+
+      '<div class="nm"><b>'+esc(tr.name)+'</b><span>'+t('g.'+tr.grade)+' · '+t('grp.'+tr.group)+' · '+fmtD(tr.date)+'</span></div>'+
+      '<div class="due '+cls+'">'+dueHtml+'</div></div>'+
+      '<div class="tl">'+evs+'<div class="btnrow" style="padding:12px 0 0"><button class="btn small" onclick="newRound('+tr.id+')">'+t('sc.newround')+'</button>'+
+      '<button class="btn small danger" onclick="delTree('+tr.id+')">'+t('sc.del')+'</button></div></div></div>';
+  }).join('');
+  updateBadge(dueCount);
+}
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function updateBadge(n){const b=document.getElementById('dueBadge');b.style.display=n?'':'none';b.textContent=n;}
+function toggleTree(id){const tr=db.trees.find(x=>x.id===id);tr.open=!tr.open;save();renderTrees();}
+function markEv(id,i){const tr=db.trees.find(x=>x.id===id);tr.ev[i].done=!tr.ev[i].done;save();renderTrees();}
+function newRound(id){const tr=db.trees.find(x=>x.id===id);toggleAdd(true);
+  document.getElementById('fName').value=tr.name;setRadio('fGrade','g',tr.grade);
+  const last=[...tr.ev].reverse().find(e=>e.k==='respray'||e.k==='spray');setRadio('fGroup','v',last?(last.g in INTERVAL?last.g:'3A'):'3A');
+  document.getElementById('fDate').value=today();window.scrollTo(0,0);document.getElementById('fName').focus();}
+function delTree(id){if(!confirm(t('sc.delq')))return;db.trees=db.trees.filter(x=>x.id!==id);save();renderTrees();}
+function clearAll(){db={trees:[]};save();renderTrees();}
+function toast(m){const el=document.getElementById('toast');el.textContent=m;el.classList.add('on');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),1800);}
+
+/* ---------- boot ---------- */
+document.getElementById('ver').textContent=' v'+APP_VERSION+' ';
+applyLang();
+if('serviceWorker' in navigator&&location.protocol.startsWith('http')){
+  navigator.serviceWorker.register('sw.js').then(reg=>{
+    reg.addEventListener('updatefound',()=>{const nw=reg.installing;nw&&nw.addEventListener('statechange',()=>{if(nw.state==='activated'&&navigator.serviceWorker.controller)location.reload();});});
+  }).catch(()=>{});
+}
+</script>
+</body>
+</html>
