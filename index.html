@@ -390,16 +390,16 @@ footer button{font-family:inherit;font-size:1em;background:none;border:none;colo
    ACTIVES: edit the table in the HTML above; only list actives whose
    Malaysian Pesticides Board registration.
    =================================================================== */
-const APP_VERSION='2026.0903.7';
+const APP_VERSION='2026.0912.1';
 const LANGS=['zh','en','ms'];
-const LANG_LABEL={zh:'中文',en:'English',ms:'BM'};
+const LANG_LABEL={zh:'中文',en:'English',ms:'Malay'};
 /* font size: 4 steps, persisted; base already differs by language */
 const FS_STEPS={zh:[16,19,22,26],en:[15,18,21,25],ms:[15,18,21,25]};
 const FS_LABEL=['A','A','A','A'];
 let fsIdx=+(localStorage.getItem('borer.fs')||1);
 function applyFont(){const px=FS_STEPS[lang][fsIdx];document.documentElement.style.setProperty('--fs',px+'px');
   const b=document.getElementById('fontBtn');b.textContent='A';b.style.fontSize=(13+fsIdx*3)+'px';b.setAttribute('aria-label','Font size '+(fsIdx+1)+'/4');}
-document.getElementById('fontBtn').onclick=()=>{fsIdx=(fsIdx+1)%FS_STEPS.zh.length;localStorage.setItem('borer.fs',fsIdx);applyFont();toast(['小','中','大','特大'][fsIdx]+' / '+['S','M','L','XL'][fsIdx]);};
+document.getElementById('fontBtn').onclick=()=>{fsIdx=(fsIdx+1)%FS_STEPS.zh.length;localStorage.setItem('borer.fs',fsIdx);applyFont();toast({zh:['小','中','大','特大'],en:['Small','Medium','Large','Extra large'],ms:['Kecil','Sederhana','Besar','Sangat besar']}[lang][fsIdx]);};
 
 /* ---------- strings ---------- */
 const S={
@@ -633,7 +633,9 @@ severe:{
 
 /* ---------- state ---------- */
 const KEY='borer.v1';
-let lang=localStorage.getItem('borer.lang')||'zh';
+const urlLang=new URLSearchParams(location.search).get('lang');
+let lang=(LANGS.includes(urlLang)?urlLang:null)||localStorage.getItem('borer.lang')||'zh';
+if(urlLang&&LANGS.includes(urlLang))localStorage.setItem('borer.lang',urlLang);
 let ans={};
 let curGrade=null;
 let db=load();
@@ -683,7 +685,8 @@ function compute(){
 let curWhy=[];
 const GCH={prevent:'防',light:'轻',mod:'中',severe:'重'};
 const GCHen={prevent:'P',light:'L',mod:'M',severe:'S'};
-function gch(g){return lang==='zh'?GCH[g]:GCHen[g]}
+const GCHms={prevent:'C',light:'R',mod:'S',severe:'T'}; /* Cegah Ringan Sederhana Teruk */
+function gch(g){return lang==='zh'?GCH[g]:lang==='ms'?GCHms[g]:GCHen[g]}
 function showGradeResult(){
   const r=document.getElementById('gres');r.className='result on g-'+curGrade;
   document.getElementById('gch').textContent=gch(curGrade);
@@ -746,7 +749,8 @@ function evText(e){
   if(e.k==='respray')return t('ev.respray')+' '+t('grp.'+e.g);
   return t('ev.'+e.k);
 }
-function fmtD(iso){const d=new Date(iso+'T00:00:00');const m=lang==='zh'?(d.getMonth()+1)+'月'+d.getDate()+'日':d.getDate()+'/'+(d.getMonth()+1);return m}
+const MS_MON=['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogos','Sep','Okt','Nov','Dis'];const EN_MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function fmtD(iso){const d=new Date(iso+'T00:00:00');if(lang==='zh')return (d.getMonth()+1)+'月'+d.getDate()+'日';return d.getDate()+' '+(lang==='ms'?MS_MON:EN_MON)[d.getMonth()];}
 function renderTrees(){
   const box=document.getElementById('trees');let dueCount=0;
   if(!db.trees.length){box.innerHTML='<div class="empty">'+t('sc.empty')+'</div>';updateBadge(0);return;}
