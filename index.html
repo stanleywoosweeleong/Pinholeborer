@@ -223,7 +223,7 @@ footer button{font-family:inherit;font-size:1em;background:none;border:none;colo
 
   <div class="key">
     <b data-i18n="id.trap.h">为什么本软件不用酒精陷阱</b>
-    <span data-i18n="id.trap.t">酒精会把 10–30 米内的小蠹虫引过来，挂在树旁边等于把虫引到那棵树上。本软件不用陷阱，改用雨后巡树头：看到新木屑就喷。</span>
+    <span data-i18n="id.trap.t">酒精会吸引小蠹虫，诱捕器挂在树旁边可能把虫引到那棵树上。本软件不用陷阱，改用雨后巡树头：看到新木屑就喷。</span>
   </div>
 
   <h3 data-i18n="id.fus.h">小蠹虫自己带来的病：梢枯</h3>
@@ -299,15 +299,15 @@ footer button{font-family:inherit;font-size:1em;background:none;border:none;colo
     <div class="in">
       <table>
         <tr><th data-i18n="tb.active">有效成分</th><th data-i18n="tb.group">IRAC 组</th><th data-i18n="tb.hold">大约保护期</th></tr>
-        <tr><td>Cypermethrin 氯氰菊酯</td><td>3A</td><td data-i18n="tb.d14">约 14 天，雨季更短</td></tr>
-        <tr><td>Lambda-cyhalothrin 高效氯氟氰菊酯</td><td>3A</td><td data-i18n="tb.d14b">约 14 天，比氯氰菊酯耐晒</td></tr>
-        <tr><td>Deltamethrin 溴氰菊酯</td><td>3A</td><td data-i18n="tb.d14">约 14 天，雨季更短</td></tr>
-        <tr><td>Permethrin 氯菊酯</td><td>3A</td><td data-i18n="tb.d21">约 21 天（研究证实最耐久）</td></tr>
-        <tr><td>Fipronil 氟虫腈</td><td>2B</td><td data-i18n="tb.d21f">约 21 天；只喷树头树干，不可喷到花</td></tr>
+        <tr><td>Cypermethrin 氯氰菊酯</td><td>3A</td><td data-i18n="tb.d14">无针对这类小蠹的残效数据；按经验约 14 天复喷，大雨后提前</td></tr>
+        <tr><td>Lambda-cyhalothrin 高效氯氟氰菊酯</td><td>3A</td><td data-i18n="tb.d14">无针对这类小蠹的残效数据；按经验约 14 天复喷，大雨后提前</td></tr>
+        <tr><td>Deltamethrin 溴氰菊酯</td><td>3A</td><td data-i18n="tb.d14">无针对这类小蠹的残效数据；按经验约 14 天复喷，大雨后提前</td></tr>
+        <tr><td>Permethrin 氯菊酯</td><td>3A</td><td data-i18n="tb.d21">至少 4 周（Reding & Ranger 2018 试验，最耐久）</td></tr>
+        <tr><td>Bifenthrin 联苯菊酯</td><td>3A</td><td data-i18n="tb.d21f">约 10 天，且不稳定（同一试验）</td></tr>
         <tr><td>Beauveria bassiana 白僵菌</td><td data-i18n="tb.bio">生物</td><td data-i18n="tb.bea">喷树头，让虫沾到孢子；有机可用，作用较慢</td></tr>
       </table>
       <ul>
-        <li data-i18n="pl.act.rot">轮替：3A → 2B → 3A。同一组不要连用超过两次。</li>
+        <li data-i18n="pl.act.rot">轮替：一轮菊酯类（3A），下一轮白僵菌，如此交替。只有菊酯类有喷树干防小蠹的试验证据；氟虫腈没有。</li>
         <li data-i18n="pl.act.stick">加展着剂/粘着剂，药留在树皮上更久。</li>
         <li class="no" data-i18n="pl.act.no2">不要靠内吸药（吡虫啉、噻虫嗪等）：虫吃的是菌不是树汁，树皮上药效很短。</li>
       </ul>
@@ -316,7 +316,7 @@ footer button{font-family:inherit;font-size:1em;background:none;border:none;colo
   <details>
     <summary data-i18n="pl.act.s2">针孔和烂斑的涂药</summary>
     <div class="in">
-      <p data-i18n="pl.act.paste">泰国农业部做法：把接触杀虫剂（如氟虫腈 30 毫升兑 5 升水）和杀菌剂混合，用刷子涂在刮干净的烂斑和针孔上，两天后再涂一次。</p>
+      <p data-i18n="pl.act.paste">把烂斑和针孔刮干净，按下面的疫霉方案涂杀菌剂，两天后再涂一次；再用菊酯类喷树皮。</p>
       <p data-i18n="pl.act.fung">烂斑是疫霉引起的，杀菌剂请按 <a href="https://stanleywoosweeleong.github.io/duriantrunkdiseases/" target="_blank" rel="noopener">榴莲树干病辨症</a> 软件里的疫霉方案（亚磷酸盐、甲霜灵等）。</p>
     </div>
   </details>
@@ -351,9 +351,8 @@ footer button{font-family:inherit;font-size:1em;background:none;border:none;colo
     </div>
     <label data-i18n="sc.f.group">这次喷的药</label>
     <div class="radio" id="fGroup">
-      <button type="button" data-v="3A" data-i18n="sc.f.3a">菊酯类 3A（14 天）</button>
-      <button type="button" data-v="2B" data-i18n="sc.f.2b">氟虫腈 2B（21 天）</button>
-      <button type="button" data-v="3A21" data-i18n="sc.f.perm">氯菊酯 permethrin（21 天）</button>
+      <button type="button" data-v="3A" data-i18n="sc.f.3a">菊酯类 3A（约 14 天）</button>
+      <button type="button" data-v="3A21" data-i18n="sc.f.perm">氯菊酯 permethrin（28 天）</button>
       <button type="button" data-v="BIO" data-i18n="sc.f.bio">白僵菌（14 天）</button>
     </div>
     <label data-i18n="sc.f.date">喷药日期</label>
@@ -376,7 +375,7 @@ footer button{font-family:inherit;font-size:1em;background:none;border:none;colo
 </nav>
 
 <footer>
-  <span data-i18n="ft.src">依据：Hulcr &amp; Stelinski 2017；Pongpisutta 等 2023；Reding &amp; Ranger 2018；泰国农业部推荐。</span>
+  <span data-i18n="ft.src">依据：Hulcr &amp; Stelinski 2017；Pongpisutta 等 2023；Reding &amp; Ranger 2018。</span>
   <span id="ver"></span>
   <button onclick="if(confirm(t('sc.clearq')))clearAll()" data-i18n="sc.clear">清除全部资料</button>
 </footer>
@@ -434,7 +433,7 @@ const S={
 'id.key.h':{zh:'最重要的一点：针孔 = 病灶的记号',en:'The key point: a pinhole is a marker for a hidden lesion',ms:'Perkara paling penting: lubang jarum = penanda luka tersembunyi'},
 'id.key.t':{zh:'小蠹虫专找受伤、根烂、积水的树，它闻着树里发出的酒精味来。所以一堆针孔的位置，几乎一定是树皮下面已经开始烂的地方 — 疫霉刚开始时看不见，但小蠹虫先替你找到了。用刀在针孔周围轻轻刮开树皮看一看。',en:'Ambrosia beetles seek out wounded, root-rotted or waterlogged trees, following the alcohol smell stressed wood gives off. A cluster of pinholes almost always sits over bark that has already begun to rot underneath — early Phytophthora is invisible, but the beetle finds it for you. Gently scrape the bark around the holes with a knife and look.',ms:'Kumbang ambrosia mencari pokok yang cedera, reput akar atau bertakung air, mengikut bau alkohol dari kayu yang tertekan. Kelompok lubang jarum hampir pasti berada di atas kulit yang sudah mula reput di bawahnya — Phytophthora awal tidak kelihatan, tetapi kumbang menemukannya untuk anda. Kikis perlahan kulit di sekeliling lubang dengan pisau dan periksa.'},
 'id.trap.h':{zh:'为什么本软件不用酒精陷阱',en:'Why this tool does not use alcohol traps',ms:'Mengapa perisian ini tidak guna perangkap alkohol'},
-'id.trap.t':{zh:'酒精会把 10–30 米内的小蠹虫引过来，挂在树旁边等于把虫引到那棵树上。本软件不用陷阱，改用雨后巡树头：看到新木屑就喷。',en:'Ethanol draws ambrosia beetles from 10–30 m, so a trap beside a tree sends beetles into that tree. This tool skips traps and uses the collar patrol after rain instead: fresh frass means spray.',ms:'Etanol menarik kumbang ambrosia dari 10–30 m, jadi perangkap di sebelah pokok menghantar kumbang ke pokok itu. Perisian ini tidak guna perangkap dan menggunakan pemeriksaan pangkal selepas hujan: serbuk baru bermakna sembur.'},
+'id.trap.t':{zh:'酒精会吸引小蠹虫，诱捕器挂在树旁边可能把虫引到那棵树上。本软件不用陷阱，改用雨后巡树头：看到新木屑就喷。',en:'Ethanol attracts these beetles, so a trap hung beside a tree can draw them onto that tree. This app uses no traps: walk the collars after rain and spray when you see fresh frass.',ms:'Etanol menarik kumbang ini, jadi perangkap yang digantung di sebelah pokok boleh menarik kumbang ke pokok itu. Aplikasi ini tidak guna perangkap: periksa pangkal selepas hujan dan sembur bila nampak serbuk baru.'},
 'id.fus.h':{zh:'小蠹虫自己带来的病：梢枯',en:'The disease the beetle brings itself: dieback',ms:'Penyakit yang dibawa kumbang sendiri: mati pucuk'},
 'id.fus.t':{zh:'小蠹虫体内有菌囊，钻洞时把镰刀菌（Fusarium solani、F. incarnatum）接种到洞壁上种来吃。泰国 2023 年的研究证实，这种菌会造成榴莲枝条枯死：叶黄脱落、枝梢树皮出现凹槽。所以一棵树可能同时有三个问题：虫、镰刀菌梢枯、疫霉烂根。行动方案会一起处理。',en:'The beetle carries Fusarium (F. solani, F. incarnatum) in a pouch called a mycangium and inoculates the gallery walls to farm it. A 2023 Thai study confirmed this fungus causes durian branch dieback: yellow leaves drop and the twig bark develops grooves. So one tree can have three problems at once — beetle, Fusarium dieback, Phytophthora rot. The action plan treats them together.',ms:'Kumbang membawa Fusarium (F. solani, F. incarnatum) dalam kantung bernama mycangium dan menanamnya pada dinding lubang. Kajian Thailand 2023 mengesahkan kulat ini menyebabkan mati pucuk durian: daun kuning gugur dan kulit ranting beralur. Jadi sepokok boleh ada tiga masalah serentak — kumbang, mati pucuk Fusarium, reput Phytophthora. Pelan tindakan merawat semuanya bersama.'},
 'id.go':{zh:'下一步：给这棵树分级',en:'Next: grade this tree',ms:'Seterusnya: gred pokok ini'},
@@ -487,17 +486,17 @@ const S={
 'tb.active':{zh:'有效成分',en:'Active',ms:'Bahan aktif'},
 'tb.group':{zh:'IRAC 组',en:'IRAC group',ms:'Kumpulan IRAC'},
 'tb.hold':{zh:'大约保护期',en:'Approx. protection',ms:'Anggaran perlindungan'},
-'tb.d14':{zh:'约 14 天，雨季更短',en:'About 14 days, less in the wet season',ms:'Lebih kurang 14 hari, lebih pendek musim hujan'},
-'tb.d14b':{zh:'约 14 天，比氯氰菊酯耐晒',en:'About 14 days, more sun-stable than cypermethrin',ms:'Lebih kurang 14 hari, lebih tahan cahaya daripada cypermethrin'},
-'tb.d21':{zh:'约 21 天（研究证实最耐久）',en:'About 21 days (longest residual in trials)',ms:'Lebih kurang 21 hari (paling tahan lama dalam kajian)'},
-'tb.d21f':{zh:'约 21 天；只喷树头树干，不可喷到花',en:'About 21 days; collar and trunk only, never onto flowers',ms:'Lebih kurang 21 hari; pangkal dan batang sahaja, jangan kena bunga'},
+'tb.d14':{zh:'无针对这类小蠹的残效数据；按经验约 14 天复喷，大雨后提前',en:'No residual data against these beetles; re-spray at about 14 days as a rule of thumb, sooner after heavy rain',ms:'Tiada data ketahanan terhadap kumbang ini; sembur semula sekitar 14 hari sebagai panduan kasar, lebih awal selepas hujan lebat'},
+'tb.d14b':{zh:'无针对这类小蠹的残效数据；按经验约 14 天复喷，大雨后提前',en:'No residual data against these beetles; re-spray at about 14 days as a rule of thumb, sooner after heavy rain',ms:'Tiada data ketahanan terhadap kumbang ini; sembur semula sekitar 14 hari sebagai panduan kasar, lebih awal selepas hujan lebat'},
+'tb.d21':{zh:'至少 4 周（Reding & Ranger 2018 试验，最耐久）',en:'At least 4 weeks against ambrosia beetles in a trial (Reding & Ranger 2018) — the longest-lasting',ms:'Sekurang-kurangnya 4 minggu terhadap kumbang ambrosia dalam kajian (Reding & Ranger 2018) — paling tahan lama'},
+'tb.d21f':{zh:'约 10 天，且不稳定（同一试验）',en:'About 10 days, and not reliable (same trial)',ms:'Lebih kurang 10 hari, dan tidak konsisten (kajian yang sama)'},
 'tb.bio':{zh:'生物',en:'Biological',ms:'Biologi'},
 'tb.bea':{zh:'喷树头，让虫沾到孢子；有机可用，作用较慢',en:'Spray the collar so adults pick up spores; organic-compatible, slower acting',ms:'Sembur pangkal supaya kumbang dewasa kena spora; sesuai organik, bertindak lebih perlahan'},
-'pl.act.rot':{zh:'轮替：3A → 2B → 3A。同一组不要连用超过两次。',en:'Rotate: 3A → 2B → 3A. Never use the same group more than twice in a row.',ms:'Giliran: 3A → 2B → 3A. Jangan guna kumpulan sama lebih dua kali berturut-turut.'},
+'pl.act.rot':{zh:'轮替：一轮菊酯类（3A），下一轮白僵菌，如此交替。只有菊酯类有喷树干防小蠹的试验证据；氟虫腈没有。',en:'Rotate: one pyrethroid (3A) round, then a Beauveria round, and repeat. Only pyrethroids have trunk-spray evidence against these beetles; fipronil has none.',ms:'Giliran: satu pusingan piretroid (3A), kemudian satu pusingan Beauveria, dan ulang. Hanya piretroid ada bukti semburan batang terhadap kumbang ini; fipronil tiada.'},
 'pl.act.stick':{zh:'加展着剂/粘着剂，药留在树皮上更久。',en:'Add a sticker/spreader so the chemical stays on the bark longer.',ms:'Tambah bahan pelekat supaya racun lebih lama pada kulit batang.'},
 'pl.act.no2':{zh:'不要靠内吸药（吡虫啉、噻虫嗪等）：虫吃的是菌不是树汁，树皮上药效很短。',en:'Do not rely on systemics (imidacloprid, thiamethoxam etc.): the beetle eats fungus, not sap, and bark exposure is too brief.',ms:'Jangan bergantung pada racun sistemik (imidacloprid, thiamethoxam dll.): kumbang makan kulat, bukan getah, dan pendedahan pada kulit terlalu singkat.'},
 'pl.act.s2':{zh:'针孔和烂斑的涂药',en:'Painting holes and lesions',ms:'Menyapu lubang dan luka reput'},
-'pl.act.paste':{zh:'泰国农业部做法：把接触杀虫剂（如氟虫腈 30 毫升兑 5 升水）和杀菌剂混合，用刷子涂在刮干净的烂斑和针孔上，两天后再涂一次。',en:'Thai Department of Agriculture method: mix a contact insecticide (e.g. fipronil 30 ml in 5 L water) with a fungicide and brush it onto the cleaned lesion and holes; repeat after two days.',ms:'Kaedah Jabatan Pertanian Thailand: campur racun serangga sentuh (cth. fipronil 30 ml dalam 5 L air) dengan racun kulat dan sapu pada luka yang telah dibersihkan dan lubang; ulang selepas dua hari.'},
+'pl.act.paste':{zh:'把烂斑和针孔刮干净，按下面的疫霉方案涂杀菌剂，两天后再涂一次；再用菊酯类喷树皮。',en:'Scrape the lesions and pinholes clean, brush on the Phytophthora treatment below, and repeat after two days; then spray the bark with a pyrethroid.',ms:'Kikis luka dan lubang sehingga bersih, sapu rawatan Phytophthora di bawah, dan ulang selepas dua hari; kemudian sembur kulit dengan piretroid.'},
 'pl.act.fung':{zh:'烂斑是疫霉引起的，杀菌剂请按 <a href="https://stanleywoosweeleong.github.io/duriantrunkdiseases/" target="_blank" rel="noopener">榴莲树干病辨症</a> 软件里的疫霉方案（亚磷酸盐、甲霜灵等）。',en:'The lesion is Phytophthora; choose the fungicide from the Phytophthora plan in the <a href="https://stanleywoosweeleong.github.io/duriantrunkdiseases/" target="_blank" rel="noopener">Durian Trunk Disease Triage</a> tool (phosphonate, metalaxyl etc.).',ms:'Luka reput itu Phytophthora; pilih racun kulat daripada pelan Phytophthora dalam perisian <a href="https://stanleywoosweeleong.github.io/duriantrunkdiseases/" target="_blank" rel="noopener">Durian Trunk Disease Triage</a> (fosfonat, metalaxyl dll.).'},
 'pl.spray.h':{zh:'喷树干怎么喷',en:'How to spray the trunk',ms:'Cara menyembur batang'},
 'pl.spray.1':{zh:'从土面喷到 2 米高，加上大枝分叉处，喷到树皮湿润流下为止。',en:'From soil level to 2 m plus the big branch forks; wet the bark until it runs.',ms:'Dari paras tanah hingga 2 m serta cabang besar; basahkan kulit hingga mengalir.'},
@@ -512,9 +511,9 @@ const S={
 'sc.f.nameph':{zh:'例如：A区 12 号',en:'e.g. Block A no. 12',ms:'cth. Blok A no. 12'},
 'sc.f.grade':{zh:'分级',en:'Grade',ms:'Gred'},
 'sc.f.group':{zh:'这次喷的药',en:'What was sprayed',ms:'Racun yang disembur'},
-'sc.f.3a':{zh:'菊酯类 3A（14 天）',en:'Pyrethroid 3A (14 days)',ms:'Piretroid 3A (14 hari)'},
+'sc.f.3a':{zh:'菊酯类 3A（约 14 天）',en:'Pyrethroid 3A (about 14 days)',ms:'Piretroid 3A (sekitar 14 hari)'},
 'sc.f.2b':{zh:'氟虫腈 2B（21 天）',en:'Fipronil 2B (21 days)',ms:'Fipronil 2B (21 hari)'},
-'sc.f.perm':{zh:'氯菊酯 permethrin（21 天）',en:'Permethrin (21 days)',ms:'Permethrin (21 hari)'},
+'sc.f.perm':{zh:'氯菊酯 permethrin（28 天）',en:'Permethrin (28 days)',ms:'Permethrin (28 hari)'},
 'sc.f.bio':{zh:'白僵菌（14 天）',en:'Beauveria (14 days)',ms:'Beauveria (14 hari)'},
 'sc.f.date':{zh:'喷药日期',en:'Spray date',ms:'Tarikh semburan'},
 'sc.f.save':{zh:'保存',en:'Save',ms:'Simpan'},
@@ -545,7 +544,7 @@ const S={
 'grp.2B':{zh:'氟虫腈 2B',en:'fipronil 2B',ms:'fipronil 2B'},
 'grp.3A21':{zh:'氯菊酯 3A',en:'permethrin 3A',ms:'permethrin 3A'},
 'grp.BIO':{zh:'白僵菌',en:'Beauveria',ms:'Beauveria'},
-'ft.src':{zh:'依据：Hulcr & Stelinski 2017；Pongpisutta 等 2023；Reding & Ranger 2018；泰国农业部推荐。',en:'Sources: Hulcr & Stelinski 2017; Pongpisutta et al. 2023; Reding & Ranger 2018; Thai DOA guidance.',ms:'Sumber: Hulcr & Stelinski 2017; Pongpisutta et al. 2023; Reding & Ranger 2018; panduan DOA Thailand.'},
+'ft.src':{zh:'依据：Hulcr & Stelinski 2017；Pongpisutta 等 2023；Reding & Ranger 2018。',en:'Sources: Hulcr & Stelinski 2017; Pongpisutta et al. 2023; Reding & Ranger 2018.',ms:'Sumber: Hulcr & Stelinski 2017; Pongpisutta et al. 2023; Reding & Ranger 2018.'},
 };
 
 /* ---------- plans: [title, detail] per step ---------- */
@@ -565,67 +564,67 @@ prevent:{
      ['Pilihan: Beauveria pada pangkal','Untuk blok organik atau pokok berhampiran bunga, semburan pangkal bulanan sebagai perlindungan.']]},
 light:{
  zh:[['刮开针孔周围看一看','用刀把针孔周围的树皮轻轻刮开 1 厘米。如果是白色好木，就是轻度；如果是褐色湿的，改选“树皮有烂斑”重新分级。'],
-     ['喷树干接触杀虫剂','菊酯类（3A）或氟虫腈（2B），从土面到 2 米，喷到湿润流下。加粘着剂。'],
+     ['喷树干接触杀虫剂','菊酯类（3A），氯菊酯持效最长；从土面到 2 米，喷到湿润流下。加粘着剂。'],
      ['每 7 天看树头','看针孔有没有新的木屑。有新木屑就是虫还在活动。'],
-     ['14–21 天复喷，换组','菊酯类 14 天、氟虫腈 21 天。复喷时换另一组。'],
+     ['药效过了再复喷','氯菊酯约 4 周，其他菊酯类按经验约 14 天。下一轮换成白僵菌。'],
      ['30 天后复检','重新分级。针孔没有新木屑、树皮仍干燥，就停止喷药，改为预防。']],
  en:[['Scrape around the holes and look','Gently open the bark 1 cm around the holes. Pale sound wood means light; brown wet wood means go back and choose “bark lesion”.'],
-     ['Trunk spray with a contact insecticide','Pyrethroid (3A) or fipronil (2B), soil level to 2 m, wet to run-off. Add a sticker.'],
+     ['Trunk spray with a contact insecticide','Pyrethroid (3A) — permethrin lasts longest; soil level to 2 m, wet to run-off. Add a sticker.'],
      ['Check the collar every 7 days','Look for fresh frass at the holes. Fresh frass means beetles are still active.'],
-     ['Re-spray at 14–21 days, other group','14 days for pyrethroids, 21 for fipronil. Switch group at each re-spray.'],
+     ['Re-spray when protection runs out','About 4 weeks for permethrin; about 14 days for other pyrethroids (rule of thumb). Make the next round Beauveria.'],
      ['Re-check at 30 days','Grade again. No fresh frass and dry bark means stop spraying and move to prevention.']],
  ms:[['Kikis sekeliling lubang dan periksa','Buka kulit 1 cm sekeliling lubang. Kayu pucat sihat bermakna ringan; kayu coklat lembap bermakna pilih semula “luka reput pada kulit”.'],
-     ['Sembur batang dengan racun sentuh','Piretroid (3A) atau fipronil (2B), paras tanah hingga 2 m, basah hingga mengalir. Tambah pelekat.'],
+     ['Sembur batang dengan racun sentuh','Piretroid (3A) — permethrin paling tahan lama; paras tanah hingga 2 m, basah hingga mengalir. Tambah pelekat.'],
      ['Periksa pangkal setiap 7 hari','Cari serbuk baru pada lubang. Serbuk baru bermakna kumbang masih aktif.'],
-     ['Sembur semula 14–21 hari, tukar kumpulan','14 hari untuk piretroid, 21 untuk fipronil. Tukar kumpulan setiap semburan semula.'],
+     ['Sembur semula bila perlindungan habis','Lebih kurang 4 minggu untuk permethrin; sekitar 14 hari untuk piretroid lain (panduan kasar). Pusingan seterusnya Beauveria.'],
      ['Periksa semula pada hari ke-30','Gred semula. Tiada serbuk baru dan kulit kering bermakna berhenti sembur dan beralih ke pencegahan.']]},
 mod:{
  zh:[['找到病灶，刮干净','从针孔最密的地方刮开树皮，一直刮到看见白色/淡色好木，边缘再多刮 2 厘米。刮下来的烂皮拿出园外烧掉。'],
-     ['涂药封洞','接触杀虫剂 + 杀菌剂混合，刷在刮开的地方和所有针孔上。两天后再涂一次。'],
+     ['涂药封洞','按疫霉方案把杀菌剂刷在刮开的地方和所有针孔上，两天后再涂一次。'],
      ['处理疫霉','这个烂斑就是疫霉。按“榴莲树干病辨症”软件的疫霉方案：亚磷酸盐树干注射或甲霜灵淋根。'],
-     ['喷树干','和轻度一样：菊酯类或氟虫腈，土面到 2 米，加粘着剂。'],
+     ['喷树干','和轻度一样：菊酯类（氯菊酯最耐久），土面到 2 米，加粘着剂。'],
      ['剪掉枯梢','枯死的枝梢剪到健康处，剪口封好，剪下的枝条烧掉，不要留在园里。'],
      ['树头排水、透气','拨开覆盖物 30 厘米，挖通排水，雨季不要让树头泡水。'],
-     ['14–21 天复喷，30 天复检','复喷换组。30 天重新分级：烂斑边缘长出新皮就是在好转。'],
+     ['药效过了再复喷，30 天复检','下一轮换成白僵菌。30 天重新分级：烂斑边缘长出新皮就是在好转。'],
      ['不要砍树','这级的树大多数能救回来。活着的树继续治、继续看。']],
  en:[['Find the lesion and clean it','Open the bark where the holes are densest and keep scraping until you reach pale sound wood, then 2 cm more. Carry the rotten bark out of the orchard and burn it.'],
-     ['Paint and seal','Contact insecticide + fungicide mix brushed onto the cleaned area and every hole. Repeat after two days.'],
+     ['Paint and seal','Brush the Phytophthora fungicide onto the cleaned area and every hole. Repeat after two days.'],
      ['Treat the Phytophthora','This lesion is Phytophthora. Follow the Phytophthora plan in the Trunk Disease Triage tool: phosphonate injection or metalaxyl drench.'],
-     ['Trunk spray','As for light: pyrethroid or fipronil, soil to 2 m, with sticker.'],
+     ['Trunk spray','As for light: pyrethroid (permethrin lasts longest), soil to 2 m, with sticker.'],
      ['Cut out dieback','Prune dead twigs back to healthy wood, seal cuts, burn the prunings; never leave them in the orchard.'],
      ['Drain and air the collar','Pull mulch back 30 cm, open drains, never let the collar sit in water in the wet season.'],
-     ['Re-spray at 14–21 days, re-check at 30','Switch group at re-spray. At 30 days grade again: new bark growing at the lesion edge means it is recovering.'],
+     ['Re-spray when protection runs out, re-check at 30','Make the next round Beauveria. At 30 days grade again: new bark growing at the lesion edge means it is recovering.'],
      ['Do not cut the tree down','Most trees at this grade recover. A living tree is treated and watched.']],
  ms:[['Cari luka reput dan bersihkan','Buka kulit di tempat lubang paling padat dan terus kikis hingga kayu pucat sihat, kemudian 2 cm lagi. Bawa kulit reput keluar dari kebun dan bakar.'],
-     ['Sapu dan tutup','Campuran racun serangga sentuh + racun kulat disapu pada kawasan yang dibersihkan dan setiap lubang. Ulang selepas dua hari.'],
+     ['Sapu dan tutup','Sapu racun kulat Phytophthora pada kawasan yang dibersihkan dan setiap lubang. Ulang selepas dua hari.'],
      ['Rawat Phytophthora','Luka ini adalah Phytophthora. Ikut pelan Phytophthora dalam perisian Trunk Disease Triage: suntikan fosfonat atau siraman metalaxyl.'],
-     ['Sembur batang','Seperti ringan: piretroid atau fipronil, tanah hingga 2 m, dengan pelekat.'],
+     ['Sembur batang','Seperti ringan: piretroid (permethrin paling tahan lama), tanah hingga 2 m, dengan pelekat.'],
      ['Buang ranting mati','Cantas ranting mati hingga kayu sihat, tutup luka, bakar cantasan; jangan tinggal di kebun.'],
      ['Saliran dan udara pada pangkal','Tolak sungkupan 30 cm, buka parit, jangan biar pangkal bertakung air musim hujan.'],
-     ['Sembur semula 14–21 hari, periksa semula pada 30','Tukar kumpulan setiap sembur semula. Pada hari ke-30 gred semula: kulit baru tumbuh di tepi luka bermakna pokok pulih.'],
+     ['Sembur semula bila perlindungan habis, periksa semula pada 30','Pusingan seterusnya Beauveria. Pada hari ke-30 gred semula: kulit baru tumbuh di tepi luka bermakna pokok pulih.'],
      ['Jangan tebang pokok','Kebanyakan pokok gred ini pulih. Pokok hidup dirawat dan dipantau.']]},
 severe:{
  zh:[['先确定树是不是活的','刮树皮：有绿色/白色活层、有新芽，就是活的，照下面做。整棵已死、树皮全干脱落，才跳到第 8 步。'],
      ['全部烂斑刮干净','绕树干把所有烂斑刮到好木，烂皮烧掉。刮完的面积大也不要紧，比留着烂好。'],
-     ['涂药封洞，两天后再涂','接触杀虫剂 + 杀菌剂，刷满所有刮开处和针孔。'],
+     ['涂药封洞，两天后再涂','按疫霉方案把杀菌剂刷满所有刮开处和针孔。'],
      ['疫霉全套处理','按“榴莲树干病辨症”软件的疫霉方案，树干注射加淋根，21 天后再做一次。'],
-     ['喷树干，14 天复喷','重度树是虫的繁殖场，这轮按最短间隔喷，换组轮替。'],
+     ['喷树干，14 天复喷','重度树是虫的繁殖场，这轮按最短间隔喷，菊酯类与白僵菌交替。'],
      ['重剪枯枝，减轻负担','枯梢全部剪掉、烧掉。正在挂果就疏果或全部摘掉，让树先活。'],
      ['30 天和 90 天复检','有新叶、烂斑边缘长新皮，就继续；90 天没有任何新叶，再考虑第 8 步。'],
      ['只有死树才砍','死树是小蠹虫的繁殖场，一确定死了就尽快砍掉烧掉，不要留在园里。活着的树不砍。']],
  en:[['First confirm the tree is alive','Scrape bark: green/white living layer or new shoots means alive — follow the steps below. Only a fully dead tree with dry peeling bark goes straight to step 8.'],
      ['Clean every lesion','Work round the trunk scraping all rot back to sound wood; burn the bark. A large cleaned area is better than rot left behind.'],
-     ['Paint and seal, repeat in two days','Contact insecticide + fungicide over every cleaned area and hole.'],
+     ['Paint and seal, repeat in two days','Phytophthora fungicide over every cleaned area and hole.'],
      ['Full Phytophthora treatment','Follow the Phytophthora plan in the Trunk Disease Triage tool: trunk injection plus drench, repeated after 21 days.'],
-     ['Trunk spray, re-spray at 14 days','A severe tree is a beetle nursery: use the shortest interval this round, rotating groups.'],
+     ['Trunk spray, re-spray at 14 days','A severe tree is a beetle nursery: use the shortest interval this round, alternating pyrethroid and Beauveria.'],
      ['Cut dead wood hard, lighten the load','Remove and burn all dieback. If fruiting, thin or strip the fruit so the tree can recover first.'],
      ['Re-check at 30 and 90 days','New leaves or new bark at lesion edges means keep going. No new leaf at all by 90 days — then consider step 8.'],
      ['Only a dead tree is cut','Dead trees breed beetles: once confirmed dead, fell and burn quickly. A living tree is never cut.']],
  ms:[['Pastikan dahulu pokok masih hidup','Kikis kulit: lapisan hijau/putih hidup atau pucuk baru bermakna hidup — ikut langkah di bawah. Hanya pokok yang mati sepenuhnya dengan kulit kering mengelupas terus ke langkah 8.'],
      ['Bersihkan semua luka reput','Kelilingi batang dan kikis semua reput hingga kayu sihat; bakar kulit. Kawasan besar yang bersih lebih baik daripada reput tertinggal.'],
-     ['Sapu dan tutup, ulang dua hari','Racun serangga sentuh + racun kulat pada setiap kawasan bersih dan lubang.'],
+     ['Sapu dan tutup, ulang dua hari','Racun kulat Phytophthora pada setiap kawasan bersih dan lubang.'],
      ['Rawatan Phytophthora penuh','Ikut pelan Phytophthora dalam perisian Trunk Disease Triage: suntikan batang serta siraman, ulang selepas 21 hari.'],
-     ['Sembur batang, sembur semula 14 hari','Pokok teruk ialah tempat pembiakan kumbang: guna selang terpendek pusingan ini, tukar kumpulan.'],
+     ['Sembur batang, sembur semula 14 hari','Pokok teruk ialah tempat pembiakan kumbang: guna selang terpendek pusingan ini, berselang piretroid dan Beauveria.'],
      ['Cantas kayu mati, ringankan beban','Buang dan bakar semua ranting mati. Jika berbuah, jarangkan atau buang buah supaya pokok pulih dahulu.'],
      ['Periksa semula pada 30 dan 90 hari','Daun baru atau kulit baru di tepi luka bermakna teruskan. Tiada daun baru langsung pada 90 hari — barulah pertimbangkan langkah 8.'],
      ['Hanya pokok mati ditebang','Pokok mati membiakkan kumbang: setelah disahkan mati, tebang dan bakar segera. Pokok hidup tidak ditebang.']]}
@@ -711,8 +710,9 @@ function renderPlan(){
 }
 
 /* ---------- schedule ---------- */
-const INTERVAL={'3A':14,'2B':21,'3A21':21,'BIO':14};
-const ROT={'3A':'2B','2B':'3A','3A21':'2B','BIO':'3A'};
+/* '2B' kept only so trees saved before 2026-11 still compute; it is no longer offered. */
+const INTERVAL={'3A':14,'2B':21,'3A21':28,'BIO':14};
+const ROT={'3A':'BIO','2B':'3A','3A21':'BIO','BIO':'3A21'};
 function toggleAdd(on){document.getElementById('addForm').classList.toggle('on',on);if(on&&!document.getElementById('fDate').value)document.getElementById('fDate').value=today();}
 document.getElementById('addBtn').onclick=()=>toggleAdd(true);
 function setRadio(id,attr,val){document.querySelectorAll('#'+id+' button').forEach(b=>b.classList.toggle('sel',b.dataset[attr]===val));}
