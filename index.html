@@ -377,6 +377,7 @@ footer button{font-family:inherit;font-size:1em;background:none;border:none;colo
   </form>
 
   <div class="trees" id="trees"></div>
+  <div class="btnrow" id="clearRow" style="padding:18px 0 0;justify-content:center;display:none"><button class="btn small danger" onclick="if(confirm(t('sc.clearq')))clearAll()" data-i18n="sc.clear">清除全部资料</button></div>
 </section>
 <div class="share" id="share">
   <h3 data-i18n="sh.h">把这个软件传给别的果农</h3>
@@ -404,7 +405,6 @@ footer button{font-family:inherit;font-size:1em;background:none;border:none;colo
 <footer>
   <span data-i18n="ft.src">依据：Hulcr &amp; Stelinski 2017；Pongpisutta 等 2023；Reding &amp; Ranger 2018。</span>
   <span id="ver"></span>
-  <button onclick="if(confirm(t('sc.clearq')))clearAll()" data-i18n="sc.clear">清除全部资料</button>
 </footer>
 <div class="toast" id="toast"></div>
 </div>
@@ -416,7 +416,7 @@ footer button{font-family:inherit;font-size:1em;background:none;border:none;colo
    ACTIVES: edit the table in the HTML above; only list actives whose
    Malaysian Pesticides Board registration.
    =================================================================== */
-const APP_VERSION='2026.1107.1';
+const APP_VERSION='2026.1107.2';
 const LANGS=['zh','en','ms'];
 const LANG_LABEL={zh:'中文',en:'English',ms:'Malay'};
 /* font size: 4 steps, persisted; base already differs by language */
@@ -786,6 +786,7 @@ const MS_MON=['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogos','Sep','Okt','Nov'
 function fmtD(iso){const d=new Date(iso+'T00:00:00');if(lang==='zh')return (d.getMonth()+1)+'月'+d.getDate()+'日';return d.getDate()+' '+(lang==='ms'?MS_MON:EN_MON)[d.getMonth()];}
 function renderTrees(){
   const box=document.getElementById('trees');let dueCount=0;
+  document.getElementById('clearRow').style.display=db.trees.length?'flex':'none';
   if(!db.trees.length){box.innerHTML='<div class="empty">'+t('sc.empty')+'</div>';updateBadge(0);return;}
   box.innerHTML=db.trees.map(tr=>{
     const next=tr.ev.find(e=>!e.done);let dueHtml,cls='';
