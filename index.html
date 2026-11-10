@@ -71,6 +71,7 @@ li{margin-bottom:6px}
 .cmp article.borer h4 .dot{background:var(--ink)}
 .cmp article.long h4 .dot{background:var(--g-mod)}
 .cmp article.canker h4 .dot{background:var(--g-severe)}
+.cmp article.zeu h4 .dot{background:var(--g-prevent)}
 /* grading */
 .q{margin:0 0 20px}
 .q .qt{font-weight:700;margin-bottom:8px}
@@ -183,7 +184,7 @@ footer button{font-family:inherit;font-size:1em;background:none;border:none;colo
 .toast.on{opacity:1}
 :focus-visible{outline:3px solid var(--g-mod);outline-offset:2px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
-@media (min-width:560px){.cmp{grid-template-columns:1fr 1fr 1fr}}
+@media (min-width:560px){.cmp{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -198,7 +199,7 @@ footer button{font-family:inherit;font-size:1em;background:none;border:none;colo
 <!-- ================= IDENTIFY ================= -->
 <section class="view on" id="v-id">
   <h2 data-i18n="id.h">树干上的洞，是哪一种？</h2>
-  <p class="lead" data-i18n="id.lead">先分清楚。三种情况用药完全不同，用错了只会浪费钱和时间。</p>
+  <p class="lead" data-i18n="id.lead">先分清楚。四种情况用药完全不同，用错了只会浪费钱和时间。</p>
   <div class="cmp">
     <article class="borer">
       <h4><span class="dot"></span><span data-i18n="id.b.h">针孔蛀心虫（小蠹虫）</span></h4>
@@ -217,6 +218,17 @@ footer button{font-family:inherit;font-size:1em;background:none;border:none;colo
         <li data-i18n="id.l.2">洞口有粗木屑、木丝，有时像锯屑堆成一堆</li>
         <li data-i18n="id.l.3">是幼虫直接吃木头，用铁线掏或削开树皮把虫挖出来</li>
         <li data-i18n="id.l.4">不是这个软件处理的对象</li>
+      </ul>
+    </article>
+    <article class="zeu">
+      <h4><span class="dot"></span><span data-i18n="id.z.h">咖啡豹蠹蛾（红枝蛀虫）</span></h4>
+      <ul>
+        <li data-i18n="id.z.1">洞在枝条和嫩梢上，不在树头；圆洞约 3–8 毫米，一条枝通常只有一个</li>
+        <li data-i18n="id.z.2">洞口推出一粒粒圆柱形的颗粒木屑，常掉在树下地上</li>
+        <li data-i18n="id.z.3">洞以上的枝梢萎蔫、枯死，容易折断 — 不要当成小蠹虫的梢枯</li>
+        <li data-i18n="id.z.4">剖开枝条：中间是空心隧道，有粉红色、带黑点的幼虫</li>
+        <li data-i18n="id.z.5">小枝在最低的洞下 15–30 厘米剪掉处理；大枝用铁线往上掏，再注入已登记的杀虫剂。洞不要封，几天后看有没有新颗粒木屑</li>
+        <li data-i18n="id.z.6">喷树皮打不到枝里的幼虫，不是这个软件处理的对象</li>
       </ul>
     </article>
     <article class="canker">
@@ -344,6 +356,16 @@ footer button{font-family:inherit;font-size:1em;background:none;border:none;colo
       </ul>
     </div>
   </details>
+  <details>
+    <summary data-i18n="pl.wood.h">剪下的枝、刮下的树皮怎么处理</summary>
+    <div class="in">
+      <ul>
+        <li data-i18n="pl.wood.1">最好是烧掉。虫还会从剪下的木头里钻出来，所以不要留在园里。</li>
+        <li data-i18n="pl.wood.2">不能烧（雨季太湿，或不准露天烧）：切成 2–3 厘米以下的碎片，或堆在大太阳下，用透明塑料布盖住、四边用泥压紧，晒至少 6 星期。</li>
+        <li data-i18n="pl.wood.3">不要堆在好树旁边，也不要把有虫的木头带到别的园。</li>
+      </ul>
+    </div>
+  </details>
 </section>
 
 <!-- ================= SCHEDULE ================= -->
@@ -416,7 +438,7 @@ footer button{font-family:inherit;font-size:1em;background:none;border:none;colo
    ACTIVES: edit the table in the HTML above; only list actives whose
    Malaysian Pesticides Board registration.
    =================================================================== */
-const APP_VERSION='2026.1107.2';
+const APP_VERSION='2026.1110.1';
 const LANGS=['zh','en','ms'];
 const LANG_LABEL={zh:'中文',en:'English',ms:'Malay'};
 /* font size: 4 steps, persisted; base already differs by language */
@@ -445,7 +467,7 @@ const S={
 'g.severe':{zh:'重',en:'Severe',ms:'Teruk'},
 
 'id.h':{zh:'树干上的洞，是哪一种？',en:'Which kind of hole is on the trunk?',ms:'Lubang di batang itu jenis apa?'},
-'id.lead':{zh:'先分清楚。三种情况用药完全不同，用错了只会浪费钱和时间。',en:'Sort this out first. The three look similar but need completely different treatment; the wrong one wastes money and time.',ms:'Kenal pasti dahulu. Tiga keadaan ini perlukan rawatan berbeza; silap rawat hanya membazir wang dan masa.'},
+'id.lead':{zh:'先分清楚。四种情况用药完全不同，用错了只会浪费钱和时间。',en:'Sort this out first. The four look similar but need completely different treatment; the wrong one wastes money and time.',ms:'Kenal pasti dahulu. Empat keadaan ini perlukan rawatan berbeza; silap rawat hanya membazir wang dan masa.'},
 'id.b.h':{zh:'针孔蛀心虫（小蠹虫）',en:'Pinhole borer (ambrosia beetle)',ms:'Pengorek lubang jarum (kumbang ambrosia)'},
 'id.b.1':{zh:'洞口很小，1–2 毫米，像针扎的孔',en:'Tiny holes, 1–2 mm, like a needle prick',ms:'Lubang sangat kecil, 1–2 mm, seperti tusukan jarum'},
 'id.b.2':{zh:'洞口有细粉状木屑，有时挤成小圆柱（像牙签）',en:'Fine powdery frass at the hole, sometimes pushed out as a thin stick (“toothpick”)',ms:'Serbuk kayu halus di mulut lubang, kadang-kadang tersembul seperti lidi kecil'},
@@ -457,6 +479,13 @@ const S={
 'id.l.2':{zh:'洞口有粗木屑、木丝，有时像锯屑堆成一堆',en:'Coarse wood chips and fibres at the hole, often in a heap like sawdust',ms:'Tatal kayu kasar dan serat di mulut lubang, sering bertimbun seperti habuk gergaji'},
 'id.l.3':{zh:'是幼虫直接吃木头，用铁线掏或削开树皮把虫挖出来',en:'The grub eats wood directly; hook it out with wire or cut the bark and remove it',ms:'Larva makan kayu terus; cungkil dengan dawai atau buka kulit dan keluarkan larva'},
 'id.l.4':{zh:'不是这个软件处理的对象',en:'Not covered by this tool',ms:'Tidak dirangkumi oleh perisian ini'},
+'id.z.h':{zh:'咖啡豹蠹蛾（红枝蛀虫）',en:'Red branch borer (Zeuzera coffeae, a moth)',ms:'Pengorek dahan merah (Zeuzera coffeae, sejenis rama-rama)'},
+'id.z.1':{zh:'洞在枝条和嫩梢上，不在树头；圆洞约 3–8 毫米，一条枝通常只有一个',en:'Holes are on branches and young shoots, not at the collar; round, about 3–8 mm, usually one per branch',ms:'Lubang pada dahan dan pucuk muda, bukan di pangkal; bulat, lebih kurang 3–8 mm, biasanya satu sedahan'},
+'id.z.2':{zh:'洞口推出一粒粒圆柱形的颗粒木屑，常掉在树下地上',en:'Frass is pushed out as separate little cylindrical pellets, often found on the ground below',ms:'Serbuk ditolak keluar sebagai butiran silinder kecil, sering jatuh ke tanah di bawah'},
+'id.z.3':{zh:'洞以上的枝梢萎蔫、枯死，容易折断 — 不要当成小蠹虫的梢枯',en:'The shoot above the hole wilts, dies and snaps easily — do not mistake it for the beetle’s Fusarium dieback',ms:'Pucuk di atas lubang layu, mati dan mudah patah — jangan sangka ia mati pucuk Fusarium daripada kumbang'},
+'id.z.4':{zh:'剖开枝条：中间是空心隧道，有粉红色、带黑点的幼虫',en:'Split the branch: a hollow tunnel down the centre with a pinkish-red, black-spotted caterpillar',ms:'Belah dahan: terowong kosong di tengah dengan ulat merah jambu berbintik hitam'},
+'id.z.5':{zh:'小枝在最低的洞下 15–30 厘米剪掉处理；大枝用铁线往上掏，再注入已登记的杀虫剂。洞不要封，几天后看有没有新颗粒木屑',en:'Cut small branches 15–30 cm below the lowest hole and destroy them; on big branches hook upward with wire, then inject a registered insecticide. Leave the hole open and check for fresh pellets after a few days',ms:'Potong dahan kecil 15–30 cm di bawah lubang terendah dan musnahkan; pada dahan besar cungkil ke atas dengan dawai, kemudian suntik racun serangga berdaftar. Biarkan lubang terbuka dan periksa butiran baru selepas beberapa hari'},
+'id.z.6':{zh:'喷树皮打不到枝里的幼虫，不是这个软件处理的对象',en:'A bark spray cannot reach the caterpillar inside the branch; not covered by this tool',ms:'Semburan kulit tidak sampai ke ulat di dalam dahan; tidak dirangkumi oleh perisian ini'},
 'id.c.h':{zh:'黑头病 / 树干溃疡（疫霉）',en:'Patch canker / black head (Phytophthora)',ms:'Kanser batang / kepala hitam (Phytophthora)'},
 'id.c.1':{zh:'本身没有洞；树皮出现湿黑斑、流红褐色胶，有酸味',en:'No holes by itself; wet dark patch on bark, reddish-brown gum, sour smell',ms:'Tiada lubang; tompok gelap lembap pada kulit, gam merah-coklat, bau masam'},
 'id.c.2':{zh:'病原是棕榈疫霉（Phytophthora palmivora），它不是真菌，是卵菌，和小蠹虫带的镰刀菌不是同一种',en:'Caused by Phytophthora palmivora — an oomycete, not a true fungus, and not the same organism as the Fusarium the beetle carries',ms:'Disebabkan Phytophthora palmivora — oomycete, bukan kulat sebenar, dan bukan organisma yang sama dengan Fusarium yang dibawa kumbang'},
@@ -534,6 +563,10 @@ const S={
 'pl.spray.2':{zh:'树皮干的时候喷，早上或傍晚，之后 6 小时不要下雨。喷后 24 小时内下大雨，要补喷。',en:'Spray on dry bark, morning or late afternoon, with no rain for 6 hours after. Heavy rain within 24 hours means spray again.',ms:'Sembur pada kulit kering, pagi atau petang, tanpa hujan 6 jam selepasnya. Hujan lebat dalam 24 jam bermakna sembur semula.'},
 'pl.spray.3':{zh:'树头周围的杂草和覆盖物拨开 30 厘米，树头要透气。',en:'Clear weeds and mulch 30 cm back from the collar; the collar must breathe.',ms:'Bersihkan rumpai dan sungkupan 30 cm dari pangkal; pangkal perlu bernafas.'},
 'pl.spray.4':{zh:'戴手套、口罩、长袖。药不要流进地里。',en:'Gloves, mask, long sleeves. Do not let run-off soak into the soil.',ms:'Sarung tangan, topeng, lengan panjang. Jangan biar racun mengalir ke tanah.'},
+'pl.wood.h':{zh:'剪下的枝、刮下的树皮怎么处理',en:'What to do with prunings and scraped bark',ms:'Apa dibuat dengan cantasan dan kulit yang dikikis'},
+'pl.wood.1':{zh:'最好是烧掉。虫还会从剪下的木头里钻出来，所以不要留在园里。',en:'Burning is best. Beetles keep emerging from cut wood, so never leave it in the orchard.',ms:'Membakar adalah terbaik. Kumbang terus keluar dari kayu yang dipotong, jadi jangan tinggalkan di kebun.'},
+'pl.wood.2':{zh:'不能烧（雨季太湿，或不准露天烧）：切成 2–3 厘米以下的碎片，或堆在大太阳下，用透明塑料布盖住、四边用泥压紧，晒至少 6 星期。',en:'If you cannot burn (too wet, or open burning not allowed): chip it to pieces under 2–3 cm, or pile it in full sun under clear plastic with the edges buried in soil for at least 6 weeks.',ms:'Jika tidak boleh bakar (terlalu basah, atau pembakaran terbuka tidak dibenarkan): racik kepada cebisan bawah 2–3 cm, atau longgokkan di bawah matahari penuh, tutup dengan plastik lut sinar dan tanam tepinya dengan tanah sekurang-kurangnya 6 minggu.'},
+'pl.wood.3':{zh:'不要堆在好树旁边，也不要把有虫的木头带到别的园。',en:'Never stack it beside healthy trees, and never move infested wood to another orchard.',ms:'Jangan longgok di sebelah pokok sihat, dan jangan bawa kayu berserangga ke kebun lain.'},
 
 'sc.h':{zh:'日程',en:'Schedule',ms:'Jadual'},
 'sc.lead':{zh:'每棵树记一次喷药日期，软件替你算复喷、看树头和复检的日子。资料只存在这台手机。',en:'Record one spray date per tree and the re-spray, collar-check and re-grade dates are worked out for you. Data stays on this phone only.',ms:'Rekod satu tarikh semburan sepokok dan tarikh sembur semula, periksa pangkal dan gred semula dikira untuk anda. Data disimpan di telefon ini sahaja.'},
@@ -614,7 +647,8 @@ mod:{
      ['涂药封洞','按疫霉方案把杀菌剂刷在刮开的地方和所有针孔上，两天后再涂一次。'],
      ['处理疫霉','这个烂斑就是疫霉。按“榴莲树干病辨症”软件的疫霉方案：亚磷酸盐树干注射或甲霜灵淋根。'],
      ['喷树干','和轻度一样：菊酯类（氯菊酯最耐久），土面到 2 米，加粘着剂。'],
-     ['剪掉枯梢','枯死的枝梢剪到健康处，剪口封好，剪下的枝条烧掉，不要留在园里。'],
+     ['剪掉枯梢','枯死的枝梢剪到健康处，剪口封好。剪下的枝条烧掉，不能烧见下面“剪下的枝、刮下的树皮怎么处理”。剪的时候看一看：枝里有空心隧道和粉红色幼虫，就是红枝蛀虫，按“辨认”页处理。'],
+     ['果多就疏果','挂果多的树先疏掉一部分果，减轻负担，让树有力气长新皮。'],
      ['树头排水、透气','拨开覆盖物 30 厘米，挖通排水，雨季不要让树头泡水。'],
      ['药效过了再复喷，30 天复检','下一轮换成白僵菌。30 天重新分级：烂斑边缘长出新皮就是在好转。'],
      ['不要砍树','这级的树大多数能救回来。活着的树继续治、继续看。']],
@@ -622,7 +656,8 @@ mod:{
      ['Paint and seal','Brush the Phytophthora fungicide onto the cleaned area and every hole. Repeat after two days.'],
      ['Treat the Phytophthora','This lesion is Phytophthora. Follow the Phytophthora plan in the Trunk Disease Triage tool: phosphonate injection or metalaxyl drench.'],
      ['Trunk spray','As for light: pyrethroid (permethrin lasts longest), soil to 2 m, with sticker.'],
-     ['Cut out dieback','Prune dead twigs back to healthy wood, seal cuts, burn the prunings; never leave them in the orchard.'],
+     ['Cut out dieback','Prune dead twigs back to healthy wood and seal cuts. Burn the prunings; if you cannot burn, see “What to do with prunings and scraped bark” below. While cutting, look inside: a hollow tunnel with a pinkish-red caterpillar is the red branch borer — see the Identify page.'],
+     ['Thin a heavy crop','If the tree is carrying a lot of fruit, thin some of it so the tree has strength to grow new bark.'],
      ['Drain and air the collar','Pull mulch back 30 cm, open drains, never let the collar sit in water in the wet season.'],
      ['Re-spray when protection runs out, re-check at 30','Make the next round Beauveria. At 30 days grade again: new bark growing at the lesion edge means it is recovering.'],
      ['Do not cut the tree down','Most trees at this grade recover. A living tree is treated and watched.']],
@@ -630,7 +665,8 @@ mod:{
      ['Sapu dan tutup','Sapu racun kulat Phytophthora pada kawasan yang dibersihkan dan setiap lubang. Ulang selepas dua hari.'],
      ['Rawat Phytophthora','Luka ini adalah Phytophthora. Ikut pelan Phytophthora dalam perisian Trunk Disease Triage: suntikan fosfonat atau siraman metalaxyl.'],
      ['Sembur batang','Seperti ringan: piretroid (permethrin paling tahan lama), tanah hingga 2 m, dengan pelekat.'],
-     ['Buang ranting mati','Cantas ranting mati hingga kayu sihat, tutup luka, bakar cantasan; jangan tinggal di kebun.'],
+     ['Buang ranting mati','Cantas ranting mati hingga kayu sihat dan tutup luka. Bakar cantasan; jika tidak boleh bakar, lihat “Apa dibuat dengan cantasan dan kulit yang dikikis” di bawah. Semasa memotong, lihat ke dalam: terowong kosong dengan ulat merah jambu ialah pengorek dahan merah — lihat halaman Kenal.'],
+     ['Jarangkan buah yang lebat','Jika pokok berbuah lebat, jarangkan sebahagian supaya pokok ada tenaga untuk tumbuh kulit baru.'],
      ['Saliran dan udara pada pangkal','Tolak sungkupan 30 cm, buka parit, jangan biar pangkal bertakung air musim hujan.'],
      ['Sembur semula bila perlindungan habis, periksa semula pada 30','Pusingan seterusnya Beauveria. Pada hari ke-30 gred semula: kulit baru tumbuh di tepi luka bermakna pokok pulih.'],
      ['Jangan tebang pokok','Kebanyakan pokok gred ini pulih. Pokok hidup dirawat dan dipantau.']]},
@@ -640,7 +676,7 @@ severe:{
      ['涂药封洞，两天后再涂','按疫霉方案把杀菌剂刷满所有刮开处和针孔。'],
      ['疫霉全套处理','按“榴莲树干病辨症”软件的疫霉方案，树干注射加淋根，21 天后再做一次。'],
      ['喷树干，14 天复喷','重度树是虫的繁殖场，这轮按最短间隔喷，菊酯类与白僵菌交替。'],
-     ['重剪枯枝，减轻负担','枯梢全部剪掉、烧掉。正在挂果就疏果或全部摘掉，让树先活。'],
+     ['重剪枯枝，减轻负担','枯梢全部剪掉、烧掉（不能烧见下面“剪下的枝、刮下的树皮怎么处理”）。正在挂果就疏果或全部摘掉，让树先活。'],
      ['30 天和 90 天复检','有新叶、烂斑边缘长新皮，就继续；90 天没有任何新叶，再考虑第 8 步。'],
      ['只有死树才砍','死树是小蠹虫的繁殖场，一确定死了就尽快砍掉烧掉，不要留在园里。活着的树不砍。']],
  en:[['First confirm the tree is alive','Scrape bark: green/white living layer or new shoots means alive — follow the steps below. Only a fully dead tree with dry peeling bark goes straight to step 8.'],
@@ -648,7 +684,7 @@ severe:{
      ['Paint and seal, repeat in two days','Phytophthora fungicide over every cleaned area and hole.'],
      ['Full Phytophthora treatment','Follow the Phytophthora plan in the Trunk Disease Triage tool: trunk injection plus drench, repeated after 21 days.'],
      ['Trunk spray, re-spray at 14 days','A severe tree is a beetle nursery: use the shortest interval this round, alternating pyrethroid and Beauveria.'],
-     ['Cut dead wood hard, lighten the load','Remove and burn all dieback. If fruiting, thin or strip the fruit so the tree can recover first.'],
+     ['Cut dead wood hard, lighten the load','Remove and burn all dieback (if you cannot burn, see “What to do with prunings and scraped bark” below). If fruiting, thin or strip the fruit so the tree can recover first.'],
      ['Re-check at 30 and 90 days','New leaves or new bark at lesion edges means keep going. No new leaf at all by 90 days — then consider step 8.'],
      ['Only a dead tree is cut','Dead trees breed beetles: once confirmed dead, fell and burn quickly. A living tree is never cut.']],
  ms:[['Pastikan dahulu pokok masih hidup','Kikis kulit: lapisan hijau/putih hidup atau pucuk baru bermakna hidup — ikut langkah di bawah. Hanya pokok yang mati sepenuhnya dengan kulit kering mengelupas terus ke langkah 8.'],
@@ -656,7 +692,7 @@ severe:{
      ['Sapu dan tutup, ulang dua hari','Racun kulat Phytophthora pada setiap kawasan bersih dan lubang.'],
      ['Rawatan Phytophthora penuh','Ikut pelan Phytophthora dalam perisian Trunk Disease Triage: suntikan batang serta siraman, ulang selepas 21 hari.'],
      ['Sembur batang, sembur semula 14 hari','Pokok teruk ialah tempat pembiakan kumbang: guna selang terpendek pusingan ini, berselang piretroid dan Beauveria.'],
-     ['Cantas kayu mati, ringankan beban','Buang dan bakar semua ranting mati. Jika berbuah, jarangkan atau buang buah supaya pokok pulih dahulu.'],
+     ['Cantas kayu mati, ringankan beban','Buang dan bakar semua ranting mati (jika tidak boleh bakar, lihat “Apa dibuat dengan cantasan dan kulit yang dikikis” di bawah). Jika berbuah, jarangkan atau buang buah supaya pokok pulih dahulu.'],
      ['Periksa semula pada 30 dan 90 hari','Daun baru atau kulit baru di tepi luka bermakna teruskan. Tiada daun baru langsung pada 90 hari — barulah pertimbangkan langkah 8.'],
      ['Hanya pokok mati ditebang','Pokok mati membiakkan kumbang: setelah disahkan mati, tebang dan bakar segera. Pokok hidup tidak ditebang.']]}
 };
