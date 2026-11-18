@@ -208,6 +208,7 @@ footer button{font-family:inherit;font-size:1em;background:none;border:none;colo
         <li data-i18n="id.b.2">洞口有细粉状木屑，有时挤成小圆柱（像牙签）</li>
         <li data-i18n="id.b.3">很多孔聚在一起，多在树头到 1 米高，或大枝分叉处</li>
         <li data-i18n="id.b.4">虫很小，2–3 毫米，黑褐色，很少看见</li>
+        <li data-i18n="id.b.6">越南榴莲上的研究：Xyleborus similis 蛀树干和树头；Xyleborus fornicatus 蛀枝条，多在采果之后。马来西亚的记录还有 Platypus cupulatus。</li>
         <li data-i18n="id.b.5">虫不吃木头，在洞里种真菌吃菌 — 所以内吸药没用，药必须留在树皮上</li>
       </ul>
     </article>
@@ -217,6 +218,7 @@ footer button{font-family:inherit;font-size:1em;background:none;border:none;colo
         <li data-i18n="id.l.1">洞口大，5–10 毫米以上，一棵树通常只有一两个</li>
         <li data-i18n="id.l.2">洞口有粗木屑、木丝，有时像锯屑堆成一堆</li>
         <li data-i18n="id.l.3">是幼虫直接吃木头，用铁线掏或削开树皮把虫挖出来</li>
+        <li data-i18n="id.l.5">用药：氯虫苯甲酰胺对天牛幼虫未经证实；证据较好的是吡虫啉类喷树干（泰国榴莲试验）和甲氨基阿维菌素苯甲酸盐。详见 Durian IPM。</li>
         <li data-i18n="id.l.4">不是这个软件处理的对象</li>
       </ul>
     </article>
@@ -329,6 +331,7 @@ footer button{font-family:inherit;font-size:1em;background:none;border:none;colo
         <tr><td>Deltamethrin 溴氰菊酯</td><td>3A</td><td data-i18n="tb.d14">无针对这类小蠹的残效数据；按经验约 14 天复喷，大雨后提前</td></tr>
         <tr><td>Permethrin 氯菊酯</td><td>3A</td><td data-i18n="tb.d21">至少 4 周（Reding & Ranger 2018 试验，最耐久）</td></tr>
         <tr><td>Bifenthrin 联苯菊酯</td><td>3A</td><td data-i18n="tb.d21f">约 10 天，且不稳定（同一试验）</td></tr>
+        <tr><td>Emamectin benzoate 甲氨基阿维菌素苯甲酸盐</td><td>6</td><td data-i18n="tb.ema">结果期的树干喷药（越南榴莲方案，坐果后到采前 30 天）；也可树干注射（美国悬铃木试验，新侵害减少约 65%）。对蜂高毒，花期不用</td></tr>
         <tr><td>Beauveria bassiana 白僵菌</td><td data-i18n="tb.bio">生物</td><td data-i18n="tb.bea">喷树头，让虫沾到孢子；有机可用，作用较慢</td></tr>
       </table>
       <ul>
@@ -343,6 +346,17 @@ footer button{font-family:inherit;font-size:1em;background:none;border:none;colo
     <div class="in">
       <p data-i18n="pl.act.paste">把烂斑和针孔刮干净，按下面的疫霉方案涂杀菌剂，两天后再涂一次；再用菊酯类喷树皮。</p>
       <p data-i18n="pl.act.fung">烂斑是疫霉引起的，杀菌剂请按 <a href="https://stanleywoosweeleong.github.io/duriantrunkdiseases/" target="_blank" rel="noopener">榴莲树干病辨症</a> 软件里的疫霉方案（亚磷酸盐、甲霜灵等）。</p>
+    </div>
+  </details>
+  <details>
+    <summary data-i18n="pl.time.h">什么时候喷：越南榴莲园的试验</summary>
+    <div class="in">
+      <ul>
+        <li data-i18n="pl.time.1">按小蠹来袭的时机喷，不按日历：采果后喷一次，每次抽新梢喷一次，开花期一次，坐果后到采前 30 天再喷两次。</li>
+        <li data-i18n="pl.time.2">剪掉有虫的枝条带出园外；用灯光诱杀成虫（灯放在离树远一点的地方）。</li>
+        <li data-i18n="pl.time.3">结果：6 个月后，方案地块树干受害 4%，按农民习惯管理的地块 32%（各一块地，没有重复，可当作有力的参考，不是定论）。</li>
+        <li class="no" data-i18n="pl.time.4">那个方案里有一种药在马来西亚已禁止农用 — 不要用。用上面的菊酯类、甲氨基阿维菌素苯甲酸盐或白僵菌代替。</li>
+      </ul>
     </div>
   </details>
   <details>
@@ -552,12 +566,20 @@ const S={
 'tb.d21f':{zh:'约 10 天，且不稳定（同一试验）',en:'About 10 days, and not reliable (same trial)',ms:'Lebih kurang 10 hari, dan tidak konsisten (kajian yang sama)'},
 'tb.bio':{zh:'生物',en:'Biological',ms:'Biologi'},
 'tb.bea':{zh:'喷树头，让虫沾到孢子；有机可用，作用较慢',en:'Spray the collar so adults pick up spores; organic-compatible, slower acting',ms:'Sembur pangkal supaya kumbang dewasa kena spora; sesuai organik, bertindak lebih perlahan'},
-'pl.act.rot':{zh:'轮替：一轮菊酯类（3A），下一轮白僵菌，如此交替。只有菊酯类有喷树干防小蠹的试验证据；氟虫腈没有。',en:'Rotate: one pyrethroid (3A) round, then a Beauveria round, and repeat. Only pyrethroids have trunk-spray evidence against these beetles; fipronil has none.',ms:'Giliran: satu pusingan piretroid (3A), kemudian satu pusingan Beauveria, dan ulang. Hanya piretroid ada bukti semburan batang terhadap kumbang ini; fipronil tiada.'},
+'pl.act.rot':{zh:'轮替：一轮菊酯类（3A），下一轮白僵菌，如此交替。结果期可用甲氨基阿维菌素苯甲酸盐（6）顶替一轮。菊酯类有喷树干防小蠹的试验证据，甲氨基阿维菌素苯甲酸盐有注射试验和越南榴莲方案的证据；氟虫腈没有。',en:'Rotate: one pyrethroid (3A) round, then a Beauveria round, and repeat. In the fruiting season emamectin benzoate (6) can take a round. Pyrethroids have trunk-spray evidence against these beetles, emamectin benzoate has injection trials and the Vietnamese durian program; fipronil has none.',ms:'Giliran: satu pusingan piretroid (3A), kemudian satu pusingan Beauveria, dan ulang. Pada musim berbuah emamectin benzoate (6) boleh mengambil satu pusingan. Piretroid ada bukti semburan batang terhadap kumbang ini, emamectin benzoate ada ujian suntikan dan program durian Vietnam; fipronil tiada.'},
 'pl.act.stick':{zh:'加展着剂/粘着剂，药留在树皮上更久。',en:'Add a sticker/spreader so the chemical stays on the bark longer.',ms:'Tambah bahan pelekat supaya racun lebih lama pada kulit batang.'},
 'pl.act.no2':{zh:'不要靠内吸药（吡虫啉、噻虫嗪等）：虫吃的是菌不是树汁，树皮上药效很短。',en:'Do not rely on systemics (imidacloprid, thiamethoxam etc.): the beetle eats fungus, not sap, and bark exposure is too brief.',ms:'Jangan bergantung pada racun sistemik (imidacloprid, thiamethoxam dll.): kumbang makan kulat, bukan getah, dan pendedahan pada kulit terlalu singkat.'},
 'pl.act.s2':{zh:'针孔和烂斑的涂药',en:'Painting holes and lesions',ms:'Menyapu lubang dan luka reput'},
 'pl.act.paste':{zh:'把烂斑和针孔刮干净，按下面的疫霉方案涂杀菌剂，两天后再涂一次；再用菊酯类喷树皮。',en:'Scrape the lesions and pinholes clean, brush on the Phytophthora treatment below, and repeat after two days; then spray the bark with a pyrethroid.',ms:'Kikis luka dan lubang sehingga bersih, sapu rawatan Phytophthora di bawah, dan ulang selepas dua hari; kemudian sembur kulit dengan piretroid.'},
 'pl.act.fung':{zh:'烂斑是疫霉引起的，杀菌剂请按 <a href="https://stanleywoosweeleong.github.io/duriantrunkdiseases/" target="_blank" rel="noopener">榴莲树干病辨症</a> 软件里的疫霉方案（亚磷酸盐、甲霜灵等）。',en:'The lesion is Phytophthora; choose the fungicide from the Phytophthora plan in the <a href="https://stanleywoosweeleong.github.io/duriantrunkdiseases/" target="_blank" rel="noopener">Durian Trunk Disease Triage</a> tool (phosphonate, metalaxyl etc.).',ms:'Luka reput itu Phytophthora; pilih racun kulat daripada pelan Phytophthora dalam perisian <a href="https://stanleywoosweeleong.github.io/duriantrunkdiseases/" target="_blank" rel="noopener">Durian Trunk Disease Triage</a> (fosfonat, metalaxyl dll.).'},
+'id.b.6':{zh:'越南榴莲上的研究：Xyleborus similis 蛀树干和树头；Xyleborus fornicatus 蛀枝条，多在采果之后。马来西亚的记录还有 Platypus cupulatus。',en:'On durian in Vietnam: Xyleborus similis bores the trunk and trunk base; Xyleborus fornicatus bores the branches, mostly after harvest. Malaysian records also list Platypus cupulatus.',ms:'Pada durian di Vietnam: Xyleborus similis mengorek batang dan pangkal batang; Xyleborus fornicatus mengorek dahan, kebanyakannya selepas tuaian. Rekod Malaysia juga menyenaraikan Platypus cupulatus.'},
+'id.l.5':{zh:'用药：氯虫苯甲酰胺对天牛幼虫未经证实；证据较好的是吡虫啉类喷树干（泰国榴莲试验）和甲氨基阿维菌素苯甲酸盐。详见 Durian IPM。',en:'Chemicals: chlorantraniliprole is not proven on longhorn grubs; the better evidence is for imidacloprid-type trunk sprays (Thai durian trial) and emamectin benzoate. See Durian IPM.',ms:'Racun: chlorantraniliprole belum terbukti pada larva kumbang tanduk panjang; bukti lebih baik ialah untuk semburan batang jenis imidacloprid (ujian durian Thailand) dan emamectin benzoate. Lihat Durian IPM.'},
+'tb.ema':{zh:'结果期的树干喷药（越南榴莲方案，坐果后到采前 30 天）；也可树干注射（美国悬铃木试验，新侵害减少约 65%）。对蜂高毒，花期不用',en:'Fruiting-season trunk spray (Vietnam durian program, fruit set to 30 days before harvest); also by trunk injection (California sycamores, about 65% fewer new attacks). Highly toxic to bees — not in flowering',ms:'Semburan batang musim berbuah (program durian Vietnam, buah menjadi hingga 30 hari sebelum tuaian); juga suntikan batang (sycamore California, kira-kira 65% kurang serangan baru). Sangat toksik kepada lebah — jangan semasa berbunga'},
+'pl.time.h':{zh:'什么时候喷：越南榴莲园的试验',en:'When to spray: a durian trial from Vietnam',ms:'Bila menyembur: ujian durian dari Vietnam'},
+'pl.time.1':{zh:'按小蠹来袭的时机喷，不按日历：采果后喷一次，每次抽新梢喷一次，开花期一次，坐果后到采前 30 天再喷两次。',en:'Spray at the times the beetles attack, not by the calendar: once right after harvest, once at each new flush, once at flowering, and twice from fruit set until 30 days before harvest.',ms:'Sembur pada masa kumbang menyerang, bukan ikut kalendar: sekali sejurus selepas tuaian, sekali pada setiap pucuk baru, sekali semasa berbunga, dan dua kali dari buah menjadi hingga 30 hari sebelum tuaian.'},
+'pl.time.2':{zh:'剪掉有虫的枝条带出园外；用灯光诱杀成虫（灯放在离树远一点的地方）。',en:'Cut out attacked branches and take them out of the orchard; use light traps for the adult beetles (set them away from the trees).',ms:'Potong dahan yang diserang dan bawa keluar dari kebun; guna perangkap lampu untuk kumbang dewasa (letak jauh dari pokok).'},
+'pl.time.3':{zh:'结果：6 个月后，方案地块树干受害 4%，按农民习惯管理的地块 32%（各一块地，没有重复，可当作有力的参考，不是定论）。',en:'Result: after 6 months, trunk attack was 4% in the program plot against 32% in the farmer-practice plot (one plot each, not repeated — a strong pointer, not proof).',ms:'Hasil: selepas 6 bulan, serangan batang 4% di plot program berbanding 32% di plot amalan petani (satu plot setiap satu, tanpa ulangan — petunjuk kuat, bukan bukti).'},
+'pl.time.4':{zh:'那个方案里有一种药在马来西亚已禁止农用 — 不要用。用上面的菊酯类、甲氨基阿维菌素苯甲酸盐或白僵菌代替。',en:'One insecticide in that program is banned for farm use in Malaysia — do not use it. Use the pyrethroids, emamectin benzoate or Beauveria above in its place.',ms:'Satu racun dalam program itu diharamkan untuk kegunaan ladang di Malaysia — jangan guna. Gunakan piretroid, emamectin benzoate atau Beauveria di atas sebagai gantinya.'},
 'pl.spray.h':{zh:'喷树干怎么喷',en:'How to spray the trunk',ms:'Cara menyembur batang'},
 'pl.spray.1':{zh:'从土面喷到 2 米高，加上大枝分叉处，喷到树皮湿润流下为止。',en:'From soil level to 2 m plus the big branch forks; wet the bark until it runs.',ms:'Dari paras tanah hingga 2 m serta cabang besar; basahkan kulit hingga mengalir.'},
 'pl.spray.2':{zh:'树皮干的时候喷，早上或傍晚，之后 6 小时不要下雨。喷后 24 小时内下大雨，要补喷。',en:'Spray on dry bark, morning or late afternoon, with no rain for 6 hours after. Heavy rain within 24 hours means spray again.',ms:'Sembur pada kulit kering, pagi atau petang, tanpa hujan 6 jam selepasnya. Hujan lebat dalam 24 jam bermakna sembur semula.'},
@@ -608,7 +630,7 @@ const S={
 'grp.2B':{zh:'氟虫腈 2B',en:'fipronil 2B',ms:'fipronil 2B'},
 'grp.3A21':{zh:'氯菊酯 3A',en:'permethrin 3A',ms:'permethrin 3A'},
 'grp.BIO':{zh:'白僵菌',en:'Beauveria',ms:'Beauveria'},
-'ft.src':{zh:'依据：Hulcr & Stelinski 2017；Pongpisutta 等 2023；Reding & Ranger 2018。',en:'Sources: Hulcr & Stelinski 2017; Pongpisutta et al. 2023; Reding & Ranger 2018.',ms:'Sumber: Hulcr & Stelinski 2017; Pongpisutta et al. 2023; Reding & Ranger 2018.'},
+'ft.src':{zh:'依据：Hulcr & Stelinski 2017；Pongpisutta 等 2023；Reding & Ranger 2018；Lương Thị Duyên 等 2018（越南榴莲）；Grosman 等 2019。',en:'Sources: Hulcr & Stelinski 2017; Pongpisutta et al. 2023; Reding & Ranger 2018; Lương Thị Duyên et al. 2018 (Vietnamese durian); Grosman et al. 2019.',ms:'Sumber: Hulcr & Stelinski 2017; Pongpisutta et al. 2023; Reding & Ranger 2018; Lương Thị Duyên et al. 2018 (durian Vietnam); Grosman et al. 2019.'},
 };
 
 /* ---------- plans: [title, detail] per step ---------- */
